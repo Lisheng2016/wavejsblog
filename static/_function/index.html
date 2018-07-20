@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>URL加入#的意义与作用</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=b76bda3809" />
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="index.html" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="amp/index.html" />
+    
+    <meta property="og:site_name" content="admin" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="URL加入#的意义与作用" />
+    <meta property="og:description" content="去年9月，twitter的URL加入了”#!”符号，这几乎是主流网站第一次将”#”大规模用于直接与用户交互的关键URL中。这表明井号（Hash）的作用正在被重新认识。本文根据HttpWatch的文章，整理与井号有关的所有重要知识点。 比如，改版前的用户主页网址为 http://twitter.com/username 改版后，就变成了 http://twitter.com/#!/username 一、#的涵义 代表网页中的一个位置。其右面的字符，就是该位置的标识符。比如， http://www.example.com/index.html#print 就代表网页index.html的print位置。浏览器读取这个URL后，会自动将print位置滚动至可视区域。 为网页位置指定标识符，有两个方法。一是使用锚点，比如，二是使用id属性，比如。 二、HTTP请求不包括# 是用来指导浏览器动作的，对服务器端完全无用。所以，" />
+    <meta property="og:url" content="http://10.0.2.15:2373/_function/" />
+    <meta property="article:published_time" content="2016-07-30T18:07:31.000Z" />
+    <meta property="article:modified_time" content="2016-07-30T18:07:31.000Z" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="URL加入#的意义与作用" />
+    <meta name="twitter:description" content="去年9月，twitter的URL加入了”#!”符号，这几乎是主流网站第一次将”#”大规模用于直接与用户交互的关键URL中。这表明井号（Hash）的作用正在被重新认识。本文根据HttpWatch的文章，整理与井号有关的所有重要知识点。 比如，改版前的用户主页网址为 http://twitter.com/username 改版后，就变成了 http://twitter.com/#!/username 一、#的涵义 代表网页中的一个位置。其右面的字符，就是该位置的标识符。比如， http://www.example.com/index.html#print 就代表网页index.html的print位置。浏览器读取这个URL后，会自动将print位置滚动至可视区域。 为网页位置指定标识符，有两个方法。一是使用锚点，比如，二是使用id属性，比如。 二、HTTP请求不包括# 是用来指导浏览器动作的，对服务器端完全无用。所以，" />
+    <meta name="twitter:url" content="http://10.0.2.15:2373/_function/" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="admin" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "URL加入#的意义与作用",
+    "url": "http://10.0.2.15:2373/_function/",
+    "datePublished": "2016-07-30T18:07:31.000Z",
+    "dateModified": "2016-07-30T18:07:31.000Z",
+    "description": "去年9月，twitter的URL加入了”#!”符号，这几乎是主流网站第一次将”#”大规模用于直接与用户交互的关键URL中。这表明井号（Hash）的作用正在被重新认识。本文根据HttpWatch的文章，整理与井号有关的所有重要知识点。 比如，改版前的用户主页网址为 http://twitter.com/username 改版后，就变成了 http://twitter.com/#!/username 一、#的涵义 代表网页中的一个位置。其右面的字符，就是该位置的标识符。比如， http://www.example.com/index.html#print 就代表网页index.html的print位置。浏览器读取这个URL后，会自动将print位置滚动至可视区域。 为网页位置指定标识符，有两个方法。一是使用锚点，比如，二是使用id属性，比如。 二、HTTP请求不包括# 是用来指导浏览器动作的，对服务器端完全无用。所以，",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.js?v=b76bda3809"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c468a4ccc290"
+});
+</script>
+    <meta name="generator" content="Ghost 1.24" />
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../rss/index.html" />
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../index.html"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="admin" /></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../index.html">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://10.0.2.15:2373/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2016-07-30">30 July 2016</time>
+                </section>
+                <h1 class="post-full-title">URL加入#的意义与作用</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><p>去年9月，twitter的<span style="line-height: 1.5;">URL加入了”#!”符号，这几乎是主流网站第一次将”#”大规模用于直接与用户交互的关键URL中。这表明井号（Hash）的作用正在被重新认识。本文根据<a href="http://blog.httpwatch.com/2011/03/01/6-things-you-should-know-about-fragment-urls/">HttpWatch</a>的文章，整理与井号有关的所有重要知识点。</span></p>
+<p><span style="line-height: 1.5;">比如，改版前的用户主页网址为</span></p>
+<blockquote>
+<p><a href="http://twitter.com/username">http://twitter.com/username</a></p>
+</blockquote>
+<p>改版后，就变成了</p>
+<blockquote>
+<p><a href="http://twitter.com/#!/username">http://twitter.com/#!/username</a></p>
+</blockquote>
+<p></p>
+<p><strong>一、#的涵义</strong></p>
+<h1 id="">代表网页中的一个位置。其右面的字符，就是该位置的标识符。比如，</h1>
+<blockquote>
+<p><a href="http://www.example.com/index.html#print">http://www.example.com/index.html#print</a></p>
+</blockquote>
+<p>就代表网页index.html的print位置。浏览器读取这个URL后，会自动将print位置滚动至可视区域。</p>
+<p>为网页位置指定标识符，有两个方法。一是使用锚点，比如<a name=”print”></a>，二是使用id属性，比如<div id=”print” >。</p>
+<p><strong>二、HTTP请求不包括#</strong></p>
+<h1 id="http">是用来指导浏览器动作的，对服务器端完全无用。所以，HTTP请求中不包括#。</h1>
+<p>比如，访问下面的网址，</p>
+<blockquote>
+<p><a href="http://www.example.com/index.html#print">http://www.example.com/index.html#print</a></p>
+</blockquote>
+<p>浏览器实际发出的请求是这样的：</p>
+<blockquote>
+<p>GET <strong>/index.html</strong> HTTP/1.1</p>
+<p>Host: www.example.com</p>
+</blockquote>
+<p>可以看到，只是请求index.html，根本没有”#print”的部分。</p>
+<p><strong>三、#后的字符</strong></p>
+<p>在第一个#后面出现的任何字符，都会被浏览器解读为位置标识符。这意味着，这些字符都不会被发送到服务器端。</p>
+<p>比如，下面URL的原意是指定一个颜色值：</p>
+<blockquote>
+<p><a href="http://www.example.com/?color=#fff">http://www.example.com/?color=#fff</a></p>
+</blockquote>
+<p>但是，浏览器实际发出的请求是：</p>
+<blockquote>
+<p>GET <strong>/?color=</strong> HTTP/1.1</p>
+<p>Host: www.example.com</p>
+</blockquote>
+<p>可以看到，”#fff”被省略了。只有将#转码为%23，浏览器才会将其作为实义字符处理。也就是说，上面的网址应该被写成：</p>
+<blockquote>
+<p><a href="http://example.com/?color=%23fff">http://example.com/?color=%23fff</a></p>
+</blockquote>
+<p><strong>四、改变#不触发网页重载</strong></p>
+<p>单单改变#后的部分，浏览器只会滚动到相应位置，不会重新加载网页。</p>
+<p>比如，从</p>
+<blockquote>
+<p><a href="http://www.example.com/index.html#location1">http://www.example.com/index.html#location1</a></p>
+</blockquote>
+<p>改成</p>
+<blockquote>
+<p><a href="http://www.example.com/index.html#location2">http://www.example.com/index.html#location2</a></p>
+</blockquote>
+<p>浏览器不会重新向服务器请求index.html。</p>
+<p><strong>五、改变#会改变浏览器的访问历史</strong></p>
+<p>每一次改变#后的部分，都会在浏览器的访问历史中增加一个记录，使用”后退”按钮，就可以回到上一个位置。</p>
+<p>这对于ajax应用程序特别有用，可以用不同的#值，表示不同的访问状态，然后向用户给出可以访问某个状态的链接。</p>
+<p>值得注意的是，上述规则对IE 6和IE 7不成立，它们不会因为#的改变而增加历史记录。</p>
+<p><strong>六、window.location.hash读取#值</strong></p>
+<p>window.location.hash这个属性可读可写。读取时，可以用来判断网页状态是否改变；写入时，则会在不重载网页的前提下，创造一条访问历史记录。</p>
+<p><strong>七、onhashchange事件</strong></p>
+<p>这是一个HTML 5新增的事件，当#值发生变化时，就会触发这个事件。IE8+、Firefox 3.6+、Chrome 5+、Safari 4.0+支持该事件。</p>
+<p>它的使用方法有三种：</p>
+<blockquote>
+<p>window.onhashchange = func;</p>
+<body onhashchange=”func();”>
+<p>window.addEventListener(“hashchange”, func, false);</p>
+</blockquote>
+<p>对于不支持onhashchange的浏览器，可以用setInterval监控location.hash的变化。</p>
+<p><strong>八、Google抓取#的机制</strong></p>
+<p>默认情况下，Google的网络蜘蛛忽视URL的#部分。</p>
+<p>但是，Google还<a href="http://www.google.com/support/webmasters/bin/answer.py?hl=en&amp;answer=174992">规定</a>，如果你希望Ajax生成的内容被浏览引擎读取，那么URL中可以使用”#!”，Google会自动将其后面的内容转成查询字符串_escaped_fragment_的值。</p>
+<p>比如，Google发现新版twitter的URL如下：</p>
+<blockquote>
+<p><a href="http://twitter.com/#!/username">http://twitter.com/#!/username</a></p>
+</blockquote>
+<p>就会自动抓取另一个URL：</p>
+<blockquote>
+<p><a href="http://twitter.com/">http://twitter.com/</a>?<em>escaped_fragment</em>=/username</p>
+</blockquote>
+<p>通过这种机制，Google就可以索引动态的Ajax内容。</p>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="http://10.0.2.15:2373/404/">admin</a></h4>
+            <p>0</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="http://10.0.2.15:2373/404/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../learninglinux-vimvi-command/index.html">
+            <header class="post-card-header">
+                <h2 class="post-card-title">LearningLinux-Vim/Vi Command</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>Linux:Ubuntu16.04 ~sudo chown username filename 更改文件归属于哪个用户 ~sudo vim filename 创建一个文件 ~”press a” to Insert 处于一个文件中时： :e fileanme 另外打开filename文件 :q! 强制关闭vim并退出 :wq 保存并退出 :w filename 另存为filename文件 Linux:CentOS6.6 touch /etc/shadowsocks.</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"/></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../index.html">
+            <span>admin</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">URL加入#的意义与作用</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=URL%E5%8A%A0%E5%85%A5%23%E7%9A%84%E6%84%8F%E4%B9%89%E4%B8%8E%E4%BD%9C%E7%94%A8&amp;url=http://10.0.2.15:2373/_function/"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://10.0.2.15:2373/_function/"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../index.html">admin</a> &copy; 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../index.html">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=b76bda3809"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>
+</html>

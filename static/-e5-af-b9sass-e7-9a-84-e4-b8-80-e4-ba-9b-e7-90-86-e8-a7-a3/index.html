@@ -1,0 +1,347 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>对Sass的一些理解</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=b76bda3809">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="admin">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="对Sass的一些理解">
+    <meta property="og:description" content="1.Mixin和Placeholder区别是什么?使用时的最佳实践是怎么样的? 刚开始学习SASS预处理器时,我对mixin和placeholder的区别不太了解,其实经过比较,两者还是很容易区分的,也可以说两者应用的条件其实区分明确,但又可以交叉,看需求和方便程度自由选择即可. 1.1 Mixin it up 一个mixin可以包含多条可能需要反复利用的CSS规则,类似函数只不过是现在调用它输出的是CSS规则,以下是Sass参考: Mixins allow you to define styles that can be re-used throughout the stylesheet without needing to resort to non-semantic classes like .float-left. Mixins can also contain full CSS rules, and anything else">
+    <meta property="og:url" content="http://10.0.2.15:2373/-e5-af-b9sass-e7-9a-84-e4-b8-80-e4-ba-9b-e7-90-86-e8-a7-a3/">
+    <meta property="article:published_time" content="2016-11-29T05:45:38.000Z">
+    <meta property="article:modified_time" content="2017-02-22T04:54:17.000Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="对Sass的一些理解">
+    <meta name="twitter:description" content="1.Mixin和Placeholder区别是什么?使用时的最佳实践是怎么样的? 刚开始学习SASS预处理器时,我对mixin和placeholder的区别不太了解,其实经过比较,两者还是很容易区分的,也可以说两者应用的条件其实区分明确,但又可以交叉,看需求和方便程度自由选择即可. 1.1 Mixin it up 一个mixin可以包含多条可能需要反复利用的CSS规则,类似函数只不过是现在调用它输出的是CSS规则,以下是Sass参考: Mixins allow you to define styles that can be re-used throughout the stylesheet without needing to resort to non-semantic classes like .float-left. Mixins can also contain full CSS rules, and anything else">
+    <meta name="twitter:url" content="http://10.0.2.15:2373/-e5-af-b9sass-e7-9a-84-e4-b8-80-e4-ba-9b-e7-90-86-e8-a7-a3/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="admin">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "对Sass的一些理解",
+    "url": "http://10.0.2.15:2373/-e5-af-b9sass-e7-9a-84-e4-b8-80-e4-ba-9b-e7-90-86-e8-a7-a3/",
+    "datePublished": "2016-11-29T05:45:38.000Z",
+    "dateModified": "2017-02-22T04:54:17.000Z",
+    "description": "1.Mixin和Placeholder区别是什么?使用时的最佳实践是怎么样的? 刚开始学习SASS预处理器时,我对mixin和placeholder的区别不太了解,其实经过比较,两者还是很容易区分的,也可以说两者应用的条件其实区分明确,但又可以交叉,看需求和方便程度自由选择即可. 1.1 Mixin it up 一个mixin可以包含多条可能需要反复利用的CSS规则,类似函数只不过是现在调用它输出的是CSS规则,以下是Sass参考: Mixins allow you to define styles that can be re-used throughout the stylesheet without needing to resort to non-semantic classes like .float-left. Mixins can also contain full CSS rules, and anything else",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.js?v=b76bda3809"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c468a4ccc290"
+});
+</script>
+    <meta name="generator" content="Ghost 1.24">
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../rss/index.html">
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="admin"></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://10.0.2.15:2373/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2016-11-29">29 November 2016</time>
+                </section>
+                <h1 class="post-full-title">对Sass的一些理解</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><h2 id="1mixinplaceholder">1.Mixin和Placeholder区别是什么?使用时的最佳实践是怎么样的?</h2>
+<p>刚开始学习SASS预处理器时,我对mixin和placeholder的区别不太了解,其实经过比较,两者还是很容易区分的,也可以说两者应用的条件其实区分明确,但又可以交叉,看需求和方便程度自由选择即可.</p>
+<h3 id="11mixinitup">1.1 Mixin it up</h3>
+<p>一个mixin可以包含多条可能需要反复利用的CSS规则,类似函数只不过是现在调用它输出的是CSS规则,以下是<a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#mixin-content">Sass参考</a>:</p>
+<blockquote>
+<p>Mixins allow you to define styles that can be re-used throughout the stylesheet without needing to resort to non-semantic classes like .float-left. Mixins can also contain full CSS rules, and anything else allowed elsewhere in a Sass document. They can even take arguments which allows you to produce a wide variety of styles with very few mixins.</p>
+</blockquote>
+<p>下面举几个例子关于参考中描述的Sass mixin的实际作用:</p>
+<p>@mixin center() { display: block; margin-left: auto; margin-right: auto; } .container { @include center(); /* Other styles here... <em>/ } /</em> Other styles... */ .image-cover { @include center; }</p>
+<p>那么从例子中也能看得出,不一定要向mixin传递参数,定义的时候也可以不定义参数,如此步骤只需要将重复的CSS放在一个mixin里重复利用,减少了工作量.</p>
+<p>再比如,类似定义width,height的常见CSS也可以利用mixin,不过这个是要有参数的:</p>
+<p>@mixin size($width, $height: $width) { width: $width; height: $height; }</p>
+<p>使用时只要调用@include size(width,height);(默认没有height参数会使用width的值)</p>
+<p>.icon { @include size(32px); } .cover { @include size(100%, 10em); }</p>
+<p>同样的,定位也可以用mixin方法完成,方便快捷:</p>
+<p>@mixin position($position,$top:0px,$right:0px,$bottom:$top,$left:$right){ position:$position; top:$top; right:$right; bottom:$bottom; left:$left; }</p>
+<h3 id="12placeholder">1.2 Placeholder</h3>
+<p>Placeholder的类就是给存在样式交叉的元素共同定义用的,以%开头,本身不参加CSS编译,也不会在编译结果中出现,以下举例说明一下:</p>
+<p>%center { display: block; margin-left: auto; margin-right: auto; }</p>
+<p>应用时在需要其包含CSS规则的类中用@extend”引入”:</p>
+<p>.container1 { @extend %center; } .container2 { @extend %center; }</p>
+<p>那么实际上.container1,.container2的编译内容不会变化,只是编译后%center处被替代为.container1,.container2 {…},相当于取代%center的位置,替其”追加”属性.</p>
+<p>而@extend还能够”引入”其他整个CSS类:(向.table-zebra”追加”.table的规则)</p>
+<p>.table-zebra { @extend .table; tr:nth-of-type(even) { background: rgba(0,0,0,.5); } }</p>
+<h3 id="13">1.3 如何选择？</h3>
+<p>以上两者都可以减少不必要的重复劳动,那么区分使用情况的根据来源于它们的特性:<br>
+placeholder里不能用参数,无法具体修改其某一项规则,只能追加预定义规则<br>
+mixin如果不使用参数,纯粹使用@include引入会造成大量代码冗余:</p>
+<p>没有参数的mixin:</p>
+<p>@mixin center { display: block; margin-left: auto; margin-right: auto; } .container { @include center; } .image-cover { @include center; }</p>
+<p>其编译结果为:</p>
+<p>.container { display: block; margin-left: auto; margin-right: auto; } .image-cover { display: block; margin-left: auto; margin-right: auto; }</p>
+<p>同样情况使用placeholder:</p>
+<p>%center { display: block; margin-left: auto; margin-right: auto; } .container { @extend %center; } .image-cover { @extend %center; }</p>
+<p>其编译结果为:</p>
+<p>.container, .image-cover { display: block; margin-left: auto; margin-right: auto; }</p>
+<p>可见,placeholder不会造成代码的重复(当前情况下).</p>
+<p>当然,根据情况不同,可以同时用placeholder和mixin,比如我想要a,b两个类,包含不一样的颜色和字体大小,但具有相同的居中和块元素属性:</p>
+<p>%center { margin-left: auto; margin-right: auto; display: block; } @mixin skin($color, $size) { @extend %center; background: $color; height: $size; } a { @include skin(pink, 10em) ；@extend %center;} b { @include skin(blue, 90px) ；@extend %center;}</p>
+<p>编译结果为:</p>
+<p>a, b { margin-left: auto; margin-right: auto; display: block; } a { background: pink; height: 10em; } b { background: blue; height: 90px; }</p>
+<h3 id="14">1.4 总结</h3>
+<p>需要具体化参数请使用mixin,宽泛的重复利用placeholder足矣</p>
+<h2 id="2sass">2.Sass的一些计算规则</h2>
+<h3 id="21">2.1 加法</h3>
+<p>在 CSS 中能做运算的,到目前为止仅有 calc() 函数可行.但在 Sass 中,运算只是其基本特性之一<br>
+sass做加法运算是可以不考虑参数带单位,但需要单位同一<br>
+加号可以不需要空格隔开</p>
+<p>$sidebar-width: 220px; $content-width: 720px; $gap-width: 20px; .container { width: $sidebar-width+$content-width + $gap-width; margin: 0 auto; } //输出结果为: .container { width: 960px; margin: 0 auto; }</p>
+<h3 id="22">2.2 减法 – 需要注意空格</h3>
+<p>$full-width: 960px; $sidebar-width: 200px; .content { width: $full-width - $sidebar-width; } //输出结果: .content { width: 760px; }</p>
+<h3 id="23">2.3 乘法</h3>
+<p>能够支持多种单位(比如 em ,px , %)；</p>
+<p>如果进行乘法运算时,两个值单位相同时,只需要为一个数值提供单位即可(多个乘数中只需要一个乘数提供单位,否则报错).</p>
+<p>.box { width: 10px * 2; } //输出结果: .box { width: 20px; }</p>
+<h3 id="24">2.4 除法</h3>
+<p>众所周知“/”符号在 CSS 中已做为一种符号使用.因此在 Sass 中做除法运算时,直接使用“/”符号做为除号时,将不会生效,编译时既得不到我们需要的效果,也不会报错.<br>
+需要给运算的外面添加一个小括号()才能执行除法运算</p>
+<blockquote>
+<p>.box {<br>
+width: (100px / 2);<br>
+}</p>
+</blockquote>
+<p>总结: ”/”符号被当作除法运算符时有以下几种情况:</p>
+<p>- 如果数值或它的任意部分是存储在一个变量中或是函数的返回值</p>
+<ul>
+<li>
+<p>如果数值被圆括号包围</p>
+</li>
+<li>
+<p>如果数值是另一个数学表达式的一部分</p>
+</li>
+</ul>
+<p>p { font: 10px/8px; // 纯 CSS,不是除法运算 $width: 1000px; width: $width/2; // 使用了变量,是除法运算 width: round(1.5)/2; // 使用了函数,是除法运算 height: (500px/2); // 使用了圆括号,是除法运算 margin-left: 5px + 8px/2px; // 使用了加(+)号,是除法运算 } //输出结果: p { font: 10px/8px; width: 500px; width: 1; height: 250px; margin-left: 9px; }</p>
+<p>Sass 的除法运算还有一个情况.先回忆一下,在乘法运算时,如果两个值带有相同单位时,做乘法运算时,出来的结果并不是我们需要的结果.但在除法运算时,如果两个值带有相同的单位值时,除法运算之后会得到一个不带单位的数值</p>
+<p>.box { width: (1000px / 100px); } //输出结果: .box { width: 10; }</p>
+<h3 id="25">2.5 颜色运算 – 分段运算</h3>
+<p>所有算数运算都支持颜色值,并且是分段运算的.也就是说,红、绿和蓝各颜色分段单独进行运算</p>
+<p>p { color: #010203 + #040506; } 计算公式为 01 + 04 = 05、02 + 05 = 07 和 03 + 06 = 09,然后合并 p { background-color: #012345 + #543210; color:#123456 * 2; } //输出结果: p { background-color: #555555; color: #2468ac; }</p>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="http://10.0.2.15:2373/404/">admin</a></h4>
+            <p>0</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="http://10.0.2.15:2373/404/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../">
+            <span>admin</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">—</span>
+    <div class="floating-header-title">对Sass的一些理解</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E5%AF%B9Sass%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3&amp;url=http://10.0.2.15:2373/-e5-af-b9sass-e7-9a-84-e4-b8-80-e4-ba-9b-e7-90-86-e8-a7-a3/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://10.0.2.15:2373/-e5-af-b9sass-e7-9a-84-e4-b8-80-e4-ba-9b-e7-90-86-e8-a7-a3/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../">admin</a> © 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=b76bda3809"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>

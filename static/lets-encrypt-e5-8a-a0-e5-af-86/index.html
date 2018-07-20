@@ -1,0 +1,417 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>HTTPS Certificates switching to Let's Encrypt</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=b76bda3809">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="admin">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="HTTPS Certificates switching to Let's Encrypt">
+    <meta property="og:description" content="下载安装 certbot yum install -y certbot 创建配置文件 先创建存放配置文件的文件夹： mkdir /etc/letsencrypt/configs 编辑配置文件： vim /etc/letsencrypt/configs/www.domain.com.conf 把 domain.com 替换成自己的域名，配置文件内容： 写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&amp;gt;https重定向则不在此讨论 domains">
+    <meta property="og:url" content="http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/">
+    <meta property="article:published_time" content="2017-04-05T06:47:42.000Z">
+    <meta property="article:modified_time" content="2017-04-05T06:51:22.000Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="HTTPS Certificates switching to Let's Encrypt">
+    <meta name="twitter:description" content="下载安装 certbot yum install -y certbot 创建配置文件 先创建存放配置文件的文件夹： mkdir /etc/letsencrypt/configs 编辑配置文件： vim /etc/letsencrypt/configs/www.domain.com.conf 把 domain.com 替换成自己的域名，配置文件内容： 写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&amp;gt;https重定向则不在此讨论 domains">
+    <meta name="twitter:url" content="http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="admin">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "HTTPS Certificates switching to Let&#x27;s Encrypt",
+    "url": "http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/",
+    "datePublished": "2017-04-05T06:47:42.000Z",
+    "dateModified": "2017-04-05T06:51:22.000Z",
+    "description": "下载安装 certbot yum install -y certbot 创建配置文件 先创建存放配置文件的文件夹： mkdir /etc/letsencrypt/configs 编辑配置文件： vim /etc/letsencrypt/configs/www.domain.com.conf 把 domain.com 替换成自己的域名，配置文件内容： 写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&amp;gt;https重定向则不在此讨论 domains",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.js?v=b76bda3809"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c468a4ccc290"
+});
+</script>
+    <meta name="generator" content="Ghost 1.24">
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../rss/index.html">
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="admin"></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://10.0.2.15:2373/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2017-04-05">5 April 2017</time>
+                </section>
+                <h1 class="post-full-title">HTTPS Certificates switching to Let's Encrypt</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><ol>
+<li>下载安装 certbot</li>
+</ol>
+<blockquote>
+<h1 id="yuminstallycertbot">yum install -y certbot</h1>
+</blockquote>
+<ol start="2">
+<li>创建配置文件<br>
+先创建存放配置文件的文件夹：</li>
+</ol>
+<blockquote>
+<h1 id="mkdiretcletsencryptconfigs">mkdir /etc/letsencrypt/configs</h1>
+</blockquote>
+<p>编辑配置文件：</p>
+<blockquote>
+<h1 id="vimetcletsencryptconfigswwwdomaincomconf">vim /etc/letsencrypt/configs/www.domain.com.conf</h1>
+</blockquote>
+<p>把 domain.com 替换成自己的域名，配置文件内容：</p>
+<h1 id="wwwdomaincomwwwthisservercouldnotproveitiswwwdomaincomdomainwwwhttphttpsdomainswwwdomaincomrsakeysize2048emailyouremailexamplecomtexttruewwwdomaincomauthenticatorwebrootwebrootpathhomeadminwebwwwdomaincompublic_htmlvestanginx">写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&gt;https重定向则不在此讨论 domains = www.domain.com rsa-key-size = 2048 email = <a href="mailto:your-email@example.com">your-email@example.com</a> text = True # 把下面的路径修改为 www.domain.com 的目录位置 authenticator = webroot webroot-path = /home/admin/web/www.domain.com/public_html # 上述的根目录是vesta面板下，nginx的网站根目录，请自行更改</h1>
+<p>使用webroot 的验证方法，这种方法适用于已经有一个 Web Server 运行中的情况。certbot 会自动在 /home/admin/web/www.domain.com/public_html 下面创建一个隐藏文件 .well-known/acme-challenge，通过请求这个文件来验证 www.domain.com 确实属于你。外网服务器访问 <a href="http://www.domain.com/.well-known/acme-challenge">http://www.domain.com/.well-known/acme-challenge</a> ，如果访问成功则验证OK。不需要手动创建这个文件，certbot 会根据配置文件自动完成。</p>
+<ol start="3">
+<li>执行证书自动化生成命令</li>
+</ol>
+<blockquote>
+<h1 id="certbotcetcletsencryptconfigsdomaincomconfcertonly">certbot -c /etc/letsencrypt/configs/domain.com.conf certonly</h1>
+</blockquote>
+<p>看到下面内容即生成成功:</p>
+<blockquote>
+<p>IMPORTANT NOTES:<br>
+– Congratulations! Your certificate and chain have been saved at /etc/letsencrypt/live/www.domain.com/fullchain.pem</p>
+<h1 id="etcletsencryptlivewwwdomaincom">如果运行顺利，所有服务器所需要的证书就已经生成好了。他们被放在了 /etc/letsencrypt/live/www.domain.com/ 下：</h1>
+</blockquote>
+<blockquote>
+<h1 id="lsetcletsencryptlivedomaincom">ls /etc/letsencrypt/live/domain.com/</h1>
+<p>cert.pem #server cert only<br>
+privkey.pem #private key<br>
+chain.pem #intermediates<br>
+fullchain.pem #server cert + intermediates</p>
+</blockquote>
+<p>4.配置 Nginx 加入证书</p>
+<p>vesta面板下，需要修改的nginx文件为/home/admin/conf/web/snginx.conf</p>
+<p>请根据自己的服务配置修改和添加内容，重点只需要关注7行：</p>
+<p>server { listen 443 http2; .... ssl on; ssl_certificate /etc/letsencrypt/live/www.domain.com/fullchain.pem; ssl_certificate_key /etc/letsencrypt/live/www.domain.com/privkey.pem; ssl_dhparam /etc/nginx/ssl/dhparam.pem; ssl_trusted_certificate /etc/letsencrypt/live/www.domain.com/root_ca_cert_plus_intermediates; resolver ; .... }</p>
+<p>这7行中，部分行还不存在或者需要修改，逐个说明:</p>
+<p>首先是第一行 listen 443 http2; 作用是启用 Nginx 的 ngxhttpv2_module 模块支持 HTTP2，Nginx 版本需要高于 1.9.5，且编译时需要设置 –with-http_v2_module。</p>
+<p>ssl on;代表开启ssl，可以附加在第一行，即listen 443 http2 ssl;也是同样的作用。</p>
+<p>ssl_certificate 和 ssl_certificate_key ，分别对应 fullchain.pem 和 privkey.pem，这2个文件是之前就生成好的证书和密钥。</p>
+<p>ssl_dhparam 通过下面命令生成：(但是实际上并不需要)</p>
+<blockquote>
+<h1 id="mkdiretcnginxssl">mkdir /etc/nginx/ssl</h1>
+<h1 id="openssldhparamoutetcnginxssldhparampem2048">openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048</h1>
+</blockquote>
+<p>(与上一步一样，可选) ssl_trusted_certificate 需要下载 Let’s Encrypt 的 Root Certificates，但是我们的ssl_certificate 已经包含了 intermediates 不再需要提供 ssl_trusted_certificate，这一步可以省略：</p>
+<blockquote>
+<h1 id="cdetcletsencryptliveexamplecom">cd /etc/letsencrypt/live/example.com</h1>
+<h1 id="wgethttpsletsencryptorgcertsisrgrootx1pem">wget <a href="https://letsencrypt.org/certs/isrgrootx1.pem">https://letsencrypt.org/certs/isrgrootx1.pem</a></h1>
+<h1 id="mvisrgrootx1pemrootpem">mv isrgrootx1.pem root.pem</h1>
+<h1 id="catrootpemchainpemroot_ca_cert_plus_intermediates">cat root.pem chain.pem &gt; root_ca_cert_plus_intermediates</h1>
+</blockquote>
+<p>resolver 的作用是 “resolve names of upstream servers into addresses”， 在這個配置中，resolver 是用來解析 OCSP 服務器的域名的，建议填写VPS 提供商的 DNS 服务器，或者域名提供商的域名解析服务器，例如万网：</p>
+<p>resolver dns9.hichina.com dns10.hichina.com;</p>
+<p>Nginx 配置完成后，重启后，用浏览器测试是否一切正常。</p>
+<blockquote>
+<h1 id="systemctlreloadnginx">systemctl reload nginx</h1>
+<h1 id="systemctlrestartnginx">systemctl restart nginx</h1>
+</blockquote>
+<p>这时候站点应该默认强制使用了 HTTPS，并且浏览器地址栏左边会有绿色的小锁：</p>
+<p>5.自动化定期更新证书<br>
+Let’s Encrypt 证书有效期是3个月，可以通过 certbot 来自动化续期。</p>
+<p>通过 systemd 来自动执行证书续期任务:</p>
+<h1 id="vimusrlibsystemdsystemautorenewserviceunitdescriptionletsencryptrenewalservicetypesimpleexecstartusrbincertbotrenewquietagreetosexecstartpostbinsystemctlrestartnginxserviceinstallwantedbymultiusertarget">vim /usr/lib/systemd/system/autorenew.service [Unit] Description=Let's Encrypt renewal [Service] Type=simple ExecStart=/usr/bin/certbot renew --quiet --agree-tos #启动包含的指令 ExecStartPost=/bin/systemctl restart nginx.service #启动成功后需要执行的指令 [Install] WantedBy=multi-user.target</h1>
+<p>由于服务需要和定时器Timer做关联，要将Type设置为simple而不是oneshot，不然在执行后系统会以为不需要再次运行而关掉定时器</p>
+<p>然后增加一个 systemd timer 来触发这个服务：</p>
+<h1 id="vimetcsystemdsystemautorenewtimerunitdescriptionmonthlyrenewalofletsencryptscertificatestimeronbootsec5minonunitactivesec30dayunitautorenewserviceinstallwantedbymultiusertarget">vim /etc/systemd/system/autorenew.timer [Unit] Description=Monthly renewal of Let's Encrypt's certificates [Timer] OnBootSec=5min OnUnitActiveSec=30day Unit=autorenew.service [Install] WantedBy=multi-user.target</h1>
+<p>OnBootSec设定在系统启动后多长时间后开始第一次执行，服务器上运行着网站和数据库服务，为了减少在系统启动时的负载，设置为系统启动5分钟之后。如果开启服务时已启动，那么从服务启动时开始计算5分钟后执行</p>
+<p>OnUnitActiveSec设定定时器运行周期，设置为30天。</p>
+<p>Unit制定执行体，指向autorenew.service。<br>
+启用服务，开启 timer：</p>
+<blockquote>
+<h1 id="systemctldaemonreload">systemctl daemon-reload 重载配置文档</h1>
+<h1 id="systemctlenableautorenewserviceetcsystemdsystemautorenewtimertimercdetcsystemdsystemlnsusrlibsystemdsystemautorenewservice">systemctl enable autorenew.service # 在/etc/systemd/system/建立autorenew.timer的软链接，并启用成可启动状态，等待timer激活，等同于cd /etc/systemd/system/;ln -s /usr/lib/systemd/system/autorenew.service</h1>
+<h1 id="systemstlenableautorenewtimertimer">systemstl enable autorenew.timer # 启用timer</h1>
+<h1 id="systemctlstartautorenewtimer">systemctl start autorenew.timer</h1>
+</blockquote>
+<p>上面两条命令执行完毕后，可以通过 systemctl list-timers 列出所有 systemd 定时服务。当中可以找到 letsencrypt.timer 并看到运行时间是四星期之后(因为刚刚执行过一次)。<br>
+<img src="http://www.wavejs.com/content/images/2017/04/Screen-Shot-2017-04-05-at-2.21.31-PM.png" alt=""></p>
+<blockquote>
+<h1 id="systemctlstatusautorenewservice">systemctl status autorenew.service</h1>
+</blockquote>
+<p><img src="http://www.wavejs.com/content/images/2017/04/Screen-Shot-2017-04-05-at-2.27.03-PM.png" alt=""><br>
+启动后的状态如图，是未激活状态，实际是等待timer来激活，到此基本就可以不用担心证书过期了。</p>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="http://10.0.2.15:2373/404/">admin</a></h4>
+            <p>0</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="http://10.0.2.15:2373/404/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../dst-server-and-data-tranfer/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">DST server and data tranfer</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>Don’t starve together 世界转移指南(Mac2Windows) 将整个目录“文档/Klei/DoNotStarveTogether/Cluster_3”(对应你创建的第几个存档)，这个目录下看到几个文件：包括Master(主世界数据)，Caves(洞穴实际数据，如果选择添加洞穴的话)，cluster.ini(世界的配置文件) 迁移到windows下 C:\Documents\Klei\DoNotStarveTogether\ 此时直接创建 服务器是完全可以的，但如果想在饥荒中看到这个世界，需要修改C:\Documents\Klei\</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">4 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../ios7-cydia-crash-when-opening-fix/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">IOS7 Cydia crash when opening fix</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>iPad mini2 Cydia 自1.1.15升级至1.1.30后，发现Cydia本身不能被打开，打开即闪退。 给我的感觉是升级不成功，升级程序又将老版本Cydia(1.1.15)，然后导致这种情况。 解决方法： 1.下载Cydia安装包：cydia_1.1.15_iphoneos-arm.deb 2.使用SSH登陆iPad： cd /var/root/Media/Cydia/AutoInstall</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">1 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../">
+            <span>admin</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">—</span>
+    <div class="floating-header-title">HTTPS Certificates switching to Let's Encrypt</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=HTTPS%20Certificates%20switching%20to%20Let's%20Encrypt&amp;url=http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../">admin</a> © 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=b76bda3809"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>

@@ -1,0 +1,416 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Forensics of Chinese MITM on GitHub</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=b76bda3809">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="admin">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Forensics of Chinese MITM on GitHub">
+    <meta property="og:description" content="div.mycontainer 	{ 		width:550px;                 margin-left:100px;                 color:black; 	} 	div.bggreen 	{ 		margin:10px; 		padding:10px; 		background-color:#9C9;                 /*color:white;*/ 	} 	td.sgreen 	{ 		width:40px; 		font-weight:bold;                 background:#9C9 	} 	td.lgreen 	{ 		width:400px;                 background:#9C9 	} 	td.swhite 	{ 		width:40px; 		font-weight:bold;                 background:lightgray; 	} 	td.lwhite 	{ 		width:400px;                 background:lightgray; 	} 	span.image 	{ 		font-style:italic;">
+    <meta property="og:url" content="http://10.0.2.15:2373/forensics-of-chinese-mitm-on-github/">
+    <meta property="article:published_time" content="2016-09-17T13:30:37.000Z">
+    <meta property="article:modified_time" content="2016-09-17T13:30:37.000Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Forensics of Chinese MITM on GitHub">
+    <meta name="twitter:description" content="div.mycontainer 	{ 		width:550px;                 margin-left:100px;                 color:black; 	} 	div.bggreen 	{ 		margin:10px; 		padding:10px; 		background-color:#9C9;                 /*color:white;*/ 	} 	td.sgreen 	{ 		width:40px; 		font-weight:bold;                 background:#9C9 	} 	td.lgreen 	{ 		width:400px;                 background:#9C9 	} 	td.swhite 	{ 		width:40px; 		font-weight:bold;                 background:lightgray; 	} 	td.lwhite 	{ 		width:400px;                 background:lightgray; 	} 	span.image 	{ 		font-style:italic;">
+    <meta name="twitter:url" content="http://10.0.2.15:2373/forensics-of-chinese-mitm-on-github/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="admin">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "Forensics of Chinese MITM on GitHub",
+    "url": "http://10.0.2.15:2373/forensics-of-chinese-mitm-on-github/",
+    "datePublished": "2016-09-17T13:30:37.000Z",
+    "dateModified": "2016-09-17T13:30:37.000Z",
+    "description": "div.mycontainer \t{ \t\twidth:550px;                 margin-left:100px;                 color:black; \t} \tdiv.bggreen \t{ \t\tmargin:10px; \t\tpadding:10px; \t\tbackground-color:#9C9;                 /*color:white;*/ \t} \ttd.sgreen \t{ \t\twidth:40px; \t\tfont-weight:bold;                 background:#9C9 \t} \ttd.lgreen \t{ \t\twidth:400px;                 background:#9C9 \t} \ttd.swhite \t{ \t\twidth:40px; \t\tfont-weight:bold;                 background:lightgray; \t} \ttd.lwhite \t{ \t\twidth:400px;                 background:lightgray; \t} \tspan.image \t{ \t\tfont-style:italic;",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.js?v=b76bda3809"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c468a4ccc290"
+});
+</script>
+    <meta name="generator" content="Ghost 1.24">
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../rss/index.html">
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="admin"></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://10.0.2.15:2373/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2016-09-17">17 September 2016</time>
+                </section>
+                <h1 class="post-full-title">Forensics of Chinese MITM on GitHub</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><style>
+	div.mycontainer
+	{
+		width:550px;
+                margin-left:100px;
+                color:black;
+	}
+	div.bggreen
+	{
+		margin:10px;
+		padding:10px;
+		background-color:#9C9;
+                /*color:white;*/
+	}
+	td.sgreen
+	{
+		width:40px;
+		font-weight:bold;
+                background:#9C9
+	}
+	td.lgreen
+	{
+		width:400px;
+                background:#9C9
+	}
+	td.swhite
+	{
+		width:40px;
+		font-weight:bold;
+                background:lightgray;
+	}
+	td.lwhite
+	{
+		width:400px;
+                background:lightgray;
+	}
+	span.image
+	{
+		font-style:italic;
+		font-weight:bold;
+	}
+</style><div class="mycontainer">
+<h1 id="github">中国对Github发动的中间人攻击的调查&amp;取证</h1>
+<div class="content"> Saturday, 02 February 2013 22:10:00 (UTC/GMT)  
+![防火长城](http://www.wavejs.com/content/images/2016/09/Great_Wall_of_China_532x221-1.png)  
+ 1月26日，多位用户反映在中国国内连接代码开发网站Github出现ssl认证问题。报告显示防火长城针对国内访问Github用户发动了中间人攻击。本次攻击的目的可能在于跟踪Github用户浏览了托管在Github网站的哪些项目或者对某些项目做出过贡献。 下面是Greatfire.org的一篇比较好的文章：
+<div class="bggreen">1月26日晚上八点左右，微博和推特上出现了关于国内用户连接github.com出现ssl 无效证书警告的报告。本文下方的内容表明用户收到的无效ssl证书实际上是一次中间人攻击导致的。  
+ 这种行为非常粗陋，因为假证书签名来自未知的机构，所以很快就会被检测到。本次攻击在大约1小时后结束。</div>![untrusted session](http://www.wavejs.com/content/images/2016/09/bitinn_GitHub_SSL_error_532x340-1.png)  
+<span class="image">Screenshot of SSL error at github.com by @bitinn</span>  
+ 匿名上传到cloudshark的名为github.pcapng的抓包文件, 并作为证据中的重要部分用于分析本次事件。
+<p>一份名为github.com.crt的自签名X.509证书也同时作为证据出现。实际上从pcap 文件中提取X.509证书是比较简单的，也就是说这份证书可能也是从cloudshark的github.pcapng里提取的。</p>
+<p>国内用户的报告总体上来说不会是虚假的，因为他们是中间人攻击的受害者。尽管我们信任这些用户，但验证还是不可或缺的。<br>
+以下是一些关于抓包文件网络方面的分析，主要从几个方面展开：</p>
+<table><tbody><tr><td class="sgreen">Q1:</td><td class="lgreen">上传此文件的用户是此次攻击的受害者吗？还是自导自演？</td></tr><tr><td class="sgreen">Q2:</td><td class="lgreen">此用户是否位于中国境内？</td></tr><tr><td class="sgreen">Q3:</td><td class="lgreen">针对本次攻击中使用的技术有什么值得称道的地方吗？</td></tr></tbody></table>
+## 首先，还是TTL分析：
+<div class="bggreen">File &gt; Open URL &gt; Enter:  
+ http://www.cloudshark.org/captures/cbdd11b20a5c/download </div><span class="image">CapLoader with github.pcapng loaded</span>  
+ 在caploader 中载入云端下载的PcapNG 文件:  
+ Caploader中的主机标签显示抓包文件仅包含用户机与Github服务器两台网络主机之间的通信。文件里包含的信息显示Github服务器(207.97.227.239)的响应带有58的IP TTL与5840的TCP窗口。这两个数字是Linux服务器的典型特征(稍晚翻译有关于被动操作系统指纹识别的文章中有具体内容)但是从这里(瑞典)访问同一个服务器得到的IP TTL为128，TCP窗口大小为64240。这样的结果说明服务器的操作系统可能是windows，与那位中国用户得到的结果有比较大的出入。
+<p>那位用户收到的响应中大小为58的TTL值也说明SSL连接从用户机出发后只经过6跳就被终止。但是从ihep.ac.cn(中国北京)出发的目的地为Github.com的traceroute命令需要整整16跳。显然，经过6跳以后，数据包根本没有离开北京。<br>
+以下是向207.97.227.239的traceroute结果：</p>
+<p>traceroute to 207.97.227.239 (207.97.227.239), 30 hops max, 38 byte packets 1 gw (202.38.128.2) 0.231 ms 0.175 ms 0.178 ms 2 202.122.36.1 (202.122.36.1) 0.719 ms 0.626 ms 0.652 ms 3 192.168.1.25 (192.168.1.25) 0.509 ms 0.485 ms 0.459 ms 4 8.131 (159.226.253.77) 0.516 ms 0.488 ms 0.496 ms 5 8.198 (159.226.253.54) 11.981 ms 0.913 ms 0.829 ms 6 8.192 (159.226.254.254) 40.477 ms 40.614 ms 40.524 ms 7 Gi6-0.gw2.hkg3.asianetcom.net (203.192.137.173) 53.062 ms 40.610 ms 40.617 ms 8 te0-3-0-0.wr1.hkg0.asianetcom.net (61.14.157.249) 42.459 ms 43.133 ms 43.765 ms 9 te0-1-0-0.wr1.osa0.asianetcom.net (61.14.157.58) 76.603 ms 76.586 ms 76.648 ms 10 gi6-0-0.gw1.sjc1.asianetcom.net (61.14.157.98) 195.939 ms 195.934 ms 196.090 ms 11 ip-202-147-50-250.asianetcom.net (202.147.50.250) 180.966 ms 181.058 ms 181.339 ms 12 dcx2-edge-01.inet.qwest.net (67.14.28.70) 342.431 ms 340.882 ms 338.639 ms 13 67.133.246.158 (67.133.246.158) 253.975 ms 253.407 ms 253.742 ms 14 vlan905.core5.iad2.rackspace.net (72.4.122.10) 253.468 ms 252.947 ms 253.639 ms 15 aggr301a-1-core5.iad2.rackspace.net (72.4.122.121) 253.767 ms 253.862 ms 253.010 ms 16 github.com (207.97.227.239) 254.104 ms 253.789 ms 253.638 ms</p>
+<h2 id="mac">MAC 地址</h2>
+<p><img src="http://www.wavejs.com/content/images/2016/09/NetworkMiner_1-4-1_Hosts_github-pcapng_530x402-1.png" alt="Netminer image"><br>
+<span class="image">NetworkMiner with PCAP file from GitHub MITM loaded</span><br>
+如上图NetworkMiner截屏所示，用户机的默认网关mac地址是ec:17:2f:15:23:b0，说明该用户的路由器来自Tplink。而TPlink是中国的大型网络设备提供商(Tplink每年超过一半的销量来自中国国内)，从侧面证明了该用户确实在中国境内。</p>
+<h2 id="pcaong">PcaoNG 元数据</h2>
+<p>上一篇文章中曾经提到：PcapNG文件可以包含大量的元数据。因此写了一个简单的分析程序，程序会从匿名上传到cloudshark的github.pcapng文件里提取较多的元数据。提取出的数据显示该用户的操作系统为”64-bit Windows 7 Service Pack 1, build 7601”,并且该文件由Dumpcap1.8.2抓取(SVN Rev 44520 from /trunk-1.8)，也就是说用户使用的是wireshark1.8.2(wireshark所有的抓包都是用dumpcap进行的。</p>
+<p>PcapNG文件另外还包含大量的名称解析块,例如其中的DNS缓存条目。这些条目之中包含一条将10.99.99.102解析到”SHAOJU-IPAD.local”。所以为什么会存在不属于抓包文件内容的DNS解析条目呢？其实是因为DNS条目缓存没有从PcapNG文件中清除，也是wireshark1.8.3-1.8.3的一个缺陷。</p>
+<p>那么问题来了，谁是”Shaoju”？google一下shaoju github就可以发现有一位名叫chen shaoju 的用户，在他的推特账号下还存在试图连接github.com时遇到ssl问题的截图。<br>
+<img src="http://www.wavejs.com/content/images/2016/09/chenshaoju_GitHub_SSL_error_532x447-1.png" alt="github mitm attack"><br>
+<span class="image">SSL error received by Chen Shaoju when accessing GitHub.com</span></p>
+<h2 id="">结论</h2>
+<table><tbody><tr><td class="sgreen">Q1:</td><td class="lgreen">上传此文件的用户是此次攻击的受害者吗？还是自导自演？</td></tr><tr><td class="swhite">A1:</td><td class="lwhite">本次攻击极有可能是真实的。该用户不会利用一个用户机与攻击源只有6跳的网络来制造一次虚假的中间人攻击。</td></tr><tr><td class="sgreen">Q2:</td><td class="lgreen">此用户是否位于中国境内？</td></tr><tr><td class="swhite">A2:</td><td class="lwhite">可以确认PcapNG是由居住在无锡的chen shaoju（Github）提供的。</td></tr><tr><td class="sgreen">Q3:</td><td class="lgreen">针对本次攻击中使用的技术有什么值得称道的地方吗？
+</td></tr><tr><td class="swhite">A3:</td><td class="lwhite">根据攻击源位于受害者6跳的位置可有判断该攻击源处于中国网络架构的某些中心位置，而不是在本地ISP处。实施中间人攻击的服务器疑似运行Linux，而且它的ip ttl初始值为64，TCP窗口大小为5840</td></tr></tbody></table>
+## 2月5日更新：隐私/匿名
+<p>本篇文章透露了匿名pcapng文件上传者的身份，并在网上引起了一些反响。<br>
+其实在写这篇文章之前，曾经联系过chen shaoju本人。准确来说是曾经发过一封提醒他pcapng文件的元数据可能泄露他个人信息的邮件：</p>
+<div class="bggreen">我正在写一篇关于cloudshark上的github pcap文件的文章。我的分析中显示嗅探者就是你。公布这篇文章是否会影响到你？如果没有什么影响的话，我还是推荐你从cloudshark移除pcap文件避免其他人发现嗅探者的身份。 </div> Shaoju回复说不要紧。  
+ 在完成本文的写作后，在发布之前我寄送了chen shaoju一份原文方便他确认。shaoju 很快回复，并且表示文章写得不错。  
+ shaoju(@chen shaoju)确认本篇文章是在获得其同意之后发布的。  
+ 最后，我对在分享pcap文件时仍想保持匿名的用户提几个建议：
+<ol>
+<li>过滤掉不是目标网络通信的任何信息。</li>
+<li>使用旧版 libpcap(PCAP)文档保存或者将PcapNG文档保存为PCAP格式。上述另存为手段回去出PcapNG文件中的元数据。</li>
+<li>帧头部的信息匿名化：使用 tcpwrite,bit-twist或TraceWrangler更改例如有线MAC地址或者是IP地址等信息。</li>
+</ol>
+</div></div> 代码如下：
+<style> div.mycontainer { width:550px; margin-left:100px; color:black; } div.bggreen { margin:10px; padding:10px; background-color:#9C9; /*color:white;*/ } td.sgreen { width:40px; font-weight:bold; background:#9C9 } td.lgreen { width:400px; background:#9C9 } td.swhite { width:40px; font-weight:bold; background:lightgray; } td.lwhite { width:400px; background:lightgray; } span.image { font-style:italic; font-weight:bold; } </style> <div class="mycontainer"> <h1>中国对Github发动的中间人攻击的调查&amp;取证</h1> <div class="content"> Saturday, 02 February 2013 22:10:00 (UTC/GMT) <img src="http://www.wavejs.com/content/images/2016/09/Great_Wall_of_China_532x221-1.png" alt="防火长城"> 1月26日，多位用户反映在中国国内连接代码开发网站Github出现ssl认证问题。报告显示防火长城针对国内访问Github用户发动了中间人攻击。本次攻击的目的可能在于跟踪Github用户浏览了托管在Github网站的哪些项目或者对某些项目做出过贡献。 <br> <br> 下面是Greatfire.org的一篇比较好的文章： <div class="bggreen">1月26日晚上八点左右，微博和推特上出现了关于国内用户连接github.com出现ssl 无效证书警告的报告。本文下方的内容表明用户收到的无效ssl证书实际上是一次中间人攻击导致的。 这种行为非常粗陋，因为假证书签名来自未知的机构，所以很快就会被检测到。本次攻击在大约1小时后结束。</div> <img src="http://www.wavejs.com/content/images/2016/09/bitinn_GitHub_SSL_error_532x340-1.png" alt="untrusted session"> <span class="image">Screenshot of SSL error at github.com by @bitinn</span> 匿名上传到cloudshark的名为github.pcapng的抓包文件, 并作为证据中的重要部分用于分析本次事件。 一份名为github.com.crt的自签名X.509证书也同时作为证据出现。实际上从pcap 文件中提取X.509证书是比较简单的，也就是说这份证书可能也是从cloudshark的github.pcapng里提取的。 国内用户的报告总体上来说不会是虚假的，因为他们是中间人攻击的受害者。尽管我们信任这些用户，但验证还是不可或缺的。 以下是一些关于抓包文件网络方面的分析，主要从几个方面展开： <table> <tbody> <tr> <td class="sgreen">Q1:</td> <td class="lgreen">上传此文件的用户是此次攻击的受害者吗？还是自导自演？</td> </tr> <tr> <td class="sgreen">Q2:</td> <td class="lgreen">此用户是否位于中国境内？</td> </tr> <tr> <td class="sgreen">Q3:</td> <td class="lgreen">针对本次攻击中使用的技术有什么值得称道的地方吗？</td> </tr> </tbody> </table> <h2>首先，还是TTL分析：</h2> <div class="bggreen">File &gt; Open URL &gt; Enter: http://www.cloudshark.org/captures/cbdd11b20a5c/download </div> <span class="image">CapLoader with github.pcapng loaded</span> 在caploader 中载入云端下载的PcapNG 文件: Caploader中的主机标签显示抓包文件仅包含用户机与Github服务器两台网络主机之间的通信。文件里包含的信息显示Github服务器(207.97.227.239)的响应带有58的IP TTL与5840的TCP窗口。这两个数字是Linux服务器的典型特征(稍晚翻译有关于被动操作系统指纹识别的文章中有具体内容)但是从这里(瑞典)访问同一个服务器得到的IP TTL为128，TCP窗口大小为64240。这样的结果说明服务器的操作系统可能是windows，与那位中国用户得到的结果有比较大的出入。 那位用户收到的响应中大小为58的TTL值也说明SSL连接从用户机出发后只经过6跳就被终止。但是从ihep.ac.cn(中国北京)出发的目的地为Github.com的traceroute命令需要整整16跳。显然，经过6跳以后，数据包根本没有离开北京。 以下是向207.97.227.239的traceroute结果： <pre class="lang:default decode:true ">traceroute to 207.97.227.239 (207.97.227.239), 30 hops max, 38 byte packets 1 gw (202.38.128.2) 0.231 ms 0.175 ms 0.178 ms 2 202.122.36.1 (202.122.36.1) 0.719 ms 0.626 ms 0.652 ms 3 192.168.1.25 (192.168.1.25) 0.509 ms 0.485 ms 0.459 ms 4 8.131 (159.226.253.77) 0.516 ms 0.488 ms 0.496 ms 5 8.198 (159.226.253.54) 11.981 ms 0.913 ms 0.829 ms 6 8.192 (159.226.254.254) 40.477 ms 40.614 ms 40.524 ms 7 Gi6-0.gw2.hkg3.asianetcom.net (203.192.137.173) 53.062 ms 40.610 ms 40.617 ms 8 te0-3-0-0.wr1.hkg0.asianetcom.net (61.14.157.249) 42.459 ms 43.133 ms 43.765 ms 9 te0-1-0-0.wr1.osa0.asianetcom.net (61.14.157.58) 76.603 ms 76.586 ms 76.648 ms 10 gi6-0-0.gw1.sjc1.asianetcom.net (61.14.157.98) 195.939 ms 195.934 ms 196.090 ms 11 ip-202-147-50-250.asianetcom.net (202.147.50.250) 180.966 ms 181.058 ms 181.339 ms 12 dcx2-edge-01.inet.qwest.net (67.14.28.70) 342.431 ms 340.882 ms 338.639 ms 13 67.133.246.158 (67.133.246.158) 253.975 ms 253.407 ms 253.742 ms 14 vlan905.core5.iad2.rackspace.net (72.4.122.10) 253.468 ms 252.947 ms 253.639 ms 15 aggr301a-1-core5.iad2.rackspace.net (72.4.122.121) 253.767 ms 253.862 ms 253.010 ms 16 github.com (207.97.227.239) 254.104 ms 253.789 ms 253.638 ms</pre> <h2>MAC 地址</h2> <img src="http://www.wavejs.com/content/images/2016/09/NetworkMiner_1-4-1_Hosts_github-pcapng_530x402-1.png" alt="Netminer image"> <span class="image">NetworkMiner with PCAP file from GitHub MITM loaded</span> 如上图NetworkMiner截屏所示，用户机的默认网关mac地址是ec:17:2f:15:23:b0，说明该用户的路由器来自Tplink。而TPlink是中国的大型网络设备提供商(Tplink每年超过一半的销量来自中国国内)，从侧面证明了该用户确实在中国境内。 <h2>PcaoNG 元数据</h2> 上一篇文章中曾经提到：PcapNG文件可以包含大量的元数据。因此写了一个简单的分析程序，程序会从匿名上传到cloudshark的github.pcapng文件里提取较多的元数据。提取出的数据显示该用户的操作系统为”64-bit Windows 7 Service Pack 1, build 7601”,并且该文件由Dumpcap1.8.2抓取(SVN Rev 44520 from /trunk-1.8)，也就是说用户使用的是wireshark1.8.2(wireshark所有的抓包都是用dumpcap进行的。 PcapNG文件另外还包含大量的名称解析块,例如其中的DNS缓存条目。这些条目之中包含一条将10.99.99.102解析到”SHAOJU-IPAD.local”。所以为什么会存在不属于抓包文件内容的DNS解析条目呢？其实是因为DNS条目缓存没有从PcapNG文件中清除，也是wireshark1.8.3-1.8.3的一个缺陷。 那么问题来了，谁是”Shaoju”？google一下shaoju github就可以发现有一位名叫chen shaoju 的用户，在他的推特账号下还存在试图连接github.com时遇到ssl问题的截图。 <img src="http://www.wavejs.com/content/images/2016/09/chenshaoju_GitHub_SSL_error_532x447-1.png" alt="github mitm attack"> <span class="image">SSL error received by Chen Shaoju when accessing GitHub.com</span> <h2>结论</h2> <table> <tbody> <tr> <td class="sgreen">Q1:</td> <td class="lgreen">上传此文件的用户是此次攻击的受害者吗？还是自导自演？</td> </tr> <tr> <td class="swhite">A1:</td> <td class="lwhite">本次攻击极有可能是真实的。该用户不会利用一个用户机与攻击源只有6跳的网络来制造一次虚假的中间人攻击。</td> </tr> <tr> <td class="sgreen">Q2:</td> <td class="lgreen">此用户是否位于中国境内？</td> </tr> <tr> <td class="swhite">A2:</td> <td class="lwhite">可以确认PcapNG是由居住在无锡的chen shaoju（Github）提供的。</td> </tr> <tr> <td class="sgreen">Q3:</td> <td class="lgreen">针对本次攻击中使用的技术有什么值得称道的地方吗？
+</td> </tr> <tr> <td class="swhite">A3:</td> <td class="lwhite">根据攻击源位于受害者6跳的位置可有判断该攻击源处于中国网络架构的某些中心位置，而不是在本地ISP处。实施中间人攻击的服务器疑似运行Linux，而且它的ip ttl初始值为64，TCP窗口大小为5840</td> </tr> </tbody> </table> <h2>2月5日更新：隐私/匿名</h2> 本篇文章透露了匿名pcapng文件上传者的身份，并在网上引起了一些反响。 其实在写这篇文章之前，曾经联系过chen shaoju本人。准确来说是曾经发过一封提醒他pcapng文件的元数据可能泄露他个人信息的邮件： <div class="bggreen">我正在写一篇关于cloudshark上的github pcap文件的文章。我的分析中显示嗅探者就是你。公布这篇文章是否会影响到你？如果没有什么影响的话，我还是推荐你从cloudshark移除pcap文件避免其他人发现嗅探者的身份。 </div> Shaoju回复说不要紧。 在完成本文的写作后，在发布之前我寄送了chen shaoju一份原文方便他确认。shaoju 很快回复，并且表示文章写得不错。 shaoju(@chen shaoju)确认本篇文章是在获得其同意之后发布的。 最后，我对在分享pcap文件时仍想保持匿名的用户提几个建议： <ol> <li>过滤掉不是目标网络通信的任何信息。</li> <li>使用旧版 libpcap(PCAP)文档保存或者将PcapNG文档保存为PCAP格式。上述另存为手段回去出PcapNG文件中的元数据。</li> <li>帧头部的信息匿名化：使用 tcpwrite,bit-twist或TraceWrangler更改例如有线MAC地址或者是IP地址等信息。</li> </ol> </div> </div>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="http://10.0.2.15:2373/404/">admin</a></h4>
+            <p>0</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="http://10.0.2.15:2373/404/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../floatparagraphtext-issue/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Float[Paragraph&amp;Text issue]</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>a.special:hover {background:yellow;}   a.special:visited {color:red;}   span {font-size:100%;}   ol.float li {border:3px outset black;padding:1em;margin: 2em 5px;} [网页已上传]点击查看 代码如下：     float-test  * { border:1px red solid;</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">3 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../-e9-9d-92-e6-b5-a66-e8-b7-af-ef-bc-8d-e8-bd-a6-e7-ab-99-e7-a4-ba-e6-84-8f/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">青浦6路［车站示意］</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>a.special:hover {background:yellow;}   a.special:visited {color:red;}   span {font-size:100%;} [网页已上传]点击查看alert("目标网页已打开") 代码如下：  /*body * {border:1px red solid;}*/ /*for testing only*/ body { width:500px; } .bgorange { background-color:#F93;</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">2 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../">
+            <span>admin</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">—</span>
+    <div class="floating-header-title">Forensics of Chinese MITM on GitHub</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Forensics%20of%20Chinese%20MITM%20on%20GitHub&amp;url=http://10.0.2.15:2373/forensics-of-chinese-mitm-on-github/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://10.0.2.15:2373/forensics-of-chinese-mitm-on-github/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../">admin</a> © 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=b76bda3809"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>

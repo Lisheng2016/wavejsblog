@@ -1,0 +1,190 @@
+
+<head>
+    <meta charset="utf-8">
+
+    <title>HTTPS Certificates switching to Let's Encrypt</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <link rel="shortcut icon" href="../../favicon.ico">
+
+    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="../index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="admin">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="HTTPS Certificates switching to Let's Encrypt">
+    <meta property="og:description" content="下载安装 certbot yum install -y certbot 创建配置文件 先创建存放配置文件的文件夹： mkdir /etc/letsencrypt/configs 编辑配置文件： vim /etc/letsencrypt/configs/www.domain.com.conf 把 domain.com 替换成自己的域名，配置文件内容： 写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&amp;gt;https重定向则不在此讨论 domains">
+    <meta property="og:url" content="http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/">
+    <meta property="article:published_time" content="2017-04-05T06:47:42.000Z">
+    <meta property="article:modified_time" content="2017-04-05T06:51:22.000Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="HTTPS Certificates switching to Let's Encrypt">
+    <meta name="twitter:description" content="下载安装 certbot yum install -y certbot 创建配置文件 先创建存放配置文件的文件夹： mkdir /etc/letsencrypt/configs 编辑配置文件： vim /etc/letsencrypt/configs/www.domain.com.conf 把 domain.com 替换成自己的域名，配置文件内容： 写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&amp;gt;https重定向则不在此讨论 domains">
+    <meta name="twitter:url" content="http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="admin">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "HTTPS Certificates switching to Let&#x27;s Encrypt",
+    "url": "http://10.0.2.15:2373/lets-encrypt-e5-8a-a0-e5-af-86/",
+    "datePublished": "2017-04-05T06:47:42.000Z",
+    "dateModified": "2017-04-05T06:51:22.000Z",
+    "description": "下载安装 certbot yum install -y certbot 创建配置文件 先创建存放配置文件的文件夹： mkdir /etc/letsencrypt/configs 编辑配置文件： vim /etc/letsencrypt/configs/www.domain.com.conf 把 domain.com 替换成自己的域名，配置文件内容： 写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&amp;gt;https重定向则不在此讨论 domains",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <meta name="generator" content="Ghost 1.24">
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../../rss/index.html">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,600,400">
+    <style amp-custom>html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{margin:0.67em 0;font-size:2em}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{position:relative;vertical-align:baseline;font-size:75%;line-height:0}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}amp-img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}button,input,optgroup,select,textarea{margin:0;color:inherit;font:inherit}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{margin:0 2px;padding:0.35em 0.625em 0.75em;border:1px solid #c0c0c0}legend{padding:0;border:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-spacing:0;border-collapse:collapse}td,th{padding:0}html{max-height:100%;height:100%;font-size:62.5%;-webkit-tap-highlight-color:rgba(0, 0, 0, 0)}body{max-height:100%;height:100%;color:#3a4145;background:#f4f8fb;letter-spacing:0.01rem;font-family:"Merriweather", serif;font-size:1.8rem;line-height:1.75em;text-rendering:geometricPrecision;-webkit-font-feature-settings:"kern" 1;-moz-font-feature-settings:"kern" 1;-o-font-feature-settings:"kern" 1}::-moz-selection{background:#d6edff}::selection{background:#d6edff}h1,h2,h3,h4,h5,h6{margin:0 0 0.3em 0;color:#2e2e2e;font-family:"Open Sans", sans-serif;line-height:1.15em;text-rendering:geometricPrecision;-webkit-font-feature-settings:"dlig" 1, "liga" 1, "lnum" 1, "kern" 1;-moz-font-feature-settings:"dlig" 1, "liga" 1, "lnum" 1, "kern" 1;-o-font-feature-settings:"dlig" 1, "liga" 1, "lnum" 1, "kern" 1}h1{text-indent:-2px;letter-spacing:-1px;font-size:2.6rem}h2{letter-spacing:0;font-size:2.4rem}h3{letter-spacing:-0.6px;font-size:2.1rem}h4{font-size:1.9rem}h5{font-size:1.8rem}h6{font-size:1.8rem}a{color:#4a4a4a}a:hover{color:#111}p,ul,ol,dl{margin:0 0 2.5rem 0;font-size:1.5rem;text-rendering:geometricPrecision;-webkit-font-feature-settings:"liga" 1, "onum" 1, "kern" 1;-moz-font-feature-settings:"liga" 1, "onum" 1, "kern" 1;-o-font-feature-settings:"liga" 1, "onum" 1, "kern" 1}ol,ul{padding-left:2em}ol ol,ul ul,ul ol,ol ul{margin:0 0 0.4em 0;padding-left:2em}dl dt{float:left;clear:left;overflow:hidden;margin-bottom:1em;width:180px;text-align:right;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-bottom:1em;margin-left:200px}li{margin:0.4em 0}li li{margin:0}hr{display:block;margin:1.75em 0;padding:0;height:1px;border:0;border-top:#efefef 1px solid}blockquote{box-sizing:border-box;margin:1.75em 0 1.75em 0;padding:0 0 0 1.75em;border-left:#4a4a4a 0.4em solid;-moz-box-sizing:border-box}blockquote p{margin:0.8em 0;font-style:italic}blockquote small{display:inline-block;margin:0.8em 0 0.8em 1.5em;color:#ccc;font-size:0.9em}blockquote small:before{content:"\2014 \00A0"}blockquote cite{font-weight:700}blockquote cite a{font-weight:normal}mark{background-color:#fdffb6}code,tt{padding:1px 3px;border:#e3edf3 1px solid;background:#f7fafb;border-radius:2px;white-space:pre-wrap;font-family:Inconsolata, monospace, sans-serif;font-size:0.85em;font-feature-settings:"liga" 0;-webkit-font-feature-settings:"liga" 0;-moz-font-feature-settings:"liga" 0}pre{overflow:auto;box-sizing:border-box;margin:0 0 1.75em 0;padding:10px;width:100%;border:#e3edf3 1px solid;background:#f7fafb;border-radius:3px;white-space:pre;font-family:Inconsolata, monospace, sans-serif;font-size:0.9em;-moz-box-sizing:border-box}pre code,pre tt{padding:0;border:none;background:transparent;white-space:pre-wrap;font-size:inherit}kbd{display:inline-block;margin-bottom:0.4em;padding:1px 8px;border:#ccc 1px solid;background:#f4f4f4;border-radius:4px;box-shadow:0 1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 0 #fff inset;color:#666;text-shadow:#fff 0 1px 0;font-size:0.9em;font-weight:700}table{box-sizing:border-box;margin:1.75em 0;max-width:100%;width:100%;background-color:transparent;-moz-box-sizing:border-box}table th,table td{padding:8px;border-top:#efefef 1px solid;vertical-align:top;text-align:left;line-height:20px}table th{color:#000}table caption + thead tr:first-child th,table caption + thead tr:first-child td,table colgroup + thead tr:first-child th,table colgroup + thead tr:first-child td,table thead:first-child tr:first-child th,table thead:first-child tr:first-child td{border-top:0}table tbody + tbody{border-top:#efefef 2px solid}table table table{background-color:#fff}table tbody > tr:nth-child(odd) > td,table tbody > tr:nth-child(odd) > th{background-color:#f6f6f6}table.plain tbody > tr:nth-child(odd) > td,table.plain tbody > tr:nth-child(odd) > th{background:transparent}iframe,amp-iframe,.fluid-width-video-wrapper{display:block;margin:1.75em 0}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper amp-iframe{margin:0}textarea,select,input{margin:0 0 5px 0;padding:6px 9px;width:260px;outline:0;border:#e7eef2 1px solid;background:#fff;border-radius:4px;box-shadow:none;font-family:"Open Sans", sans-serif;font-size:1.6rem;line-height:1.4em;font-weight:100;-webkit-appearance:none}textarea{min-width:250px;min-height:80px;max-width:340px;width:100%;height:auto}input[type="text"]:focus,input[type="email"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="number"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="week"]:focus,input[type="time"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,textarea:focus{outline:none;outline-width:0;border:#bbc7cc 1px solid;background:#fff}select{width:270px;height:30px;line-height:30px}.clearfix:before,.clearfix:after{content:" ";display:table}.clearfix:after{clear:both}.clearfix{zoom:1}.main-header{position:relative;display:table;overflow:hidden;box-sizing:border-box;width:100%;height:50px;background:#5ba4e5 no-repeat center center;background-size:cover;text-align:left;-webkit-box-sizing:border-box;-moz-box-sizing:border-box}.content{background:#fff;padding-top:15px}.blog-title,.content{margin:auto;max-width:600px}.blog-title a{display:block;padding-right:16px;padding-left:16px;height:50px;color:#fff;text-decoration:none;font-family:"Open Sans", sans-serif;font-size:16px;line-height:50px;font-weight:600}.post{position:relative;margin-top:0;margin-right:16px;margin-left:16px;padding-bottom:0;max-width:100%;border-bottom:#ebf2f6 1px solid;word-wrap:break-word;font-size:0.95em;line-height:1.65em}.post-header{margin-bottom:1rem}.post-title{margin-bottom:0}.post-title a{text-decoration:none}.post-meta{display:block;margin:3px 0 0 0;color:#9eabb3;font-family:"Open Sans", sans-serif;font-size:1.3rem;line-height:2.2rem}.post-meta a{color:#9eabb3;text-decoration:none}.post-meta a:hover{text-decoration:underline}.post-meta .author{margin:0;font-size:1.3rem;line-height:1.3em}.post-date{display:inline-block;text-transform:uppercase;white-space:nowrap;font-size:1.2rem;line-height:1.2em}.post-image{margin:0;padding-top:3rem;padding-bottom:30px;border-top:1px #E8E8E8 solid}.post-content amp-img,.post-content amp-anim{position:relative;left:50%;display:block;padding:0;min-width:0;max-width:112%;width:calc(100% + 32px);height:auto;transform:translateX(-50%);-webkit-transform:translateX(-50%);-ms-transform:translateX(-50%)}.footnotes{font-size:1.3rem;line-height:1.6em;font-style:italic}.footnotes li{margin:0.6rem 0}.footnotes p{margin:0}.footnotes p a:last-child{text-decoration:none}.site-footer{position:relative;margin:0 auto 20px auto;padding:1rem 15px;max-width:600px;color:rgba(0,0,0,0.5);font-family:"Open Sans", sans-serif;font-size:1.1rem;line-height:1.75em}.site-footer a{color:rgba(0,0,0,0.5);text-decoration:none;font-weight:bold}.site-footer a:hover{border-bottom:#bbc7cc 1px solid}.poweredby{display:block;float:right;width:45%;text-align:right}.copyright{display:block;float:left;width:45%}</style>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+</head>
+
+<body class="amp-template">
+    <header class="main-header">
+        <nav class="blog-title">
+            <a href="../../">admin</a>
+        </nav>
+    </header>
+
+    <main class="content" role="main">
+        <article class="post">
+
+            <header class="post-header">
+                <h1 class="post-title">HTTPS Certificates switching to Let's Encrypt</h1>
+                <section class="post-meta">
+                    <p class="author">by <a href="http://10.0.2.15:2373/404/">admin</a></p>
+                    <time class="post-date" datetime="2017-04-05">2017-04-05</time>
+                </section>
+            </header>
+            <section class="post-content">
+
+                <div class="kg-card-markdown"><ol>
+<li>下载安装 certbot</li>
+</ol>
+<blockquote>
+<h1 id="yuminstallycertbot">yum install -y certbot</h1>
+</blockquote>
+<ol start="2">
+<li>创建配置文件<br>
+先创建存放配置文件的文件夹：</li>
+</ol>
+<blockquote>
+<h1 id="mkdiretcletsencryptconfigs">mkdir /etc/letsencrypt/configs</h1>
+</blockquote>
+<p>编辑配置文件：</p>
+<blockquote>
+<h1 id="vimetcletsencryptconfigswwwdomaincomconf">vim /etc/letsencrypt/configs/www.domain.com.conf</h1>
+</blockquote>
+<p>把 domain.com 替换成自己的域名，配置文件内容：</p>
+<h1 id="wwwdomaincomwwwthisservercouldnotproveitiswwwdomaincomdomainwwwhttphttpsdomainswwwdomaincomrsakeysize2048emailyouremailexamplecomtexttruewwwdomaincomauthenticatorwebrootwebrootpathhomeadminwebwwwdomaincompublic_htmlvestanginx">写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&gt;https重定向则不在此讨论 domains = www.domain.com rsa-key-size = 2048 email = <a href="mailto:your-email@example.com">your-email@example.com</a> text = True # 把下面的路径修改为 www.domain.com 的目录位置 authenticator = webroot webroot-path = /home/admin/web/www.domain.com/public_html # 上述的根目录是vesta面板下，nginx的网站根目录，请自行更改</h1>
+<p>使用webroot 的验证方法，这种方法适用于已经有一个 Web Server 运行中的情况。certbot 会自动在 /home/admin/web/www.domain.com/public_html 下面创建一个隐藏文件 .well-known/acme-challenge，通过请求这个文件来验证 www.domain.com 确实属于你。外网服务器访问 <a href="http://www.domain.com/.well-known/acme-challenge">http://www.domain.com/.well-known/acme-challenge</a> ，如果访问成功则验证OK。不需要手动创建这个文件，certbot 会根据配置文件自动完成。</p>
+<ol start="3">
+<li>执行证书自动化生成命令</li>
+</ol>
+<blockquote>
+<h1 id="certbotcetcletsencryptconfigsdomaincomconfcertonly">certbot -c /etc/letsencrypt/configs/domain.com.conf certonly</h1>
+</blockquote>
+<p>看到下面内容即生成成功:</p>
+<blockquote>
+<p>IMPORTANT NOTES:<br>
+– Congratulations! Your certificate and chain have been saved at /etc/letsencrypt/live/www.domain.com/fullchain.pem</p>
+<h1 id="etcletsencryptlivewwwdomaincom">如果运行顺利，所有服务器所需要的证书就已经生成好了。他们被放在了 /etc/letsencrypt/live/www.domain.com/ 下：</h1>
+</blockquote>
+<blockquote>
+<h1 id="lsetcletsencryptlivedomaincom">ls /etc/letsencrypt/live/domain.com/</h1>
+<p>cert.pem #server cert only<br>
+privkey.pem #private key<br>
+chain.pem #intermediates<br>
+fullchain.pem #server cert + intermediates</p>
+</blockquote>
+<p>4.配置 Nginx 加入证书</p>
+<p>vesta面板下，需要修改的nginx文件为/home/admin/conf/web/snginx.conf</p>
+<p>请根据自己的服务配置修改和添加内容，重点只需要关注7行：</p>
+<p>server { listen 443 http2; .... ssl on; ssl_certificate /etc/letsencrypt/live/www.domain.com/fullchain.pem; ssl_certificate_key /etc/letsencrypt/live/www.domain.com/privkey.pem; ssl_dhparam /etc/nginx/ssl/dhparam.pem; ssl_trusted_certificate /etc/letsencrypt/live/www.domain.com/root_ca_cert_plus_intermediates; resolver ; .... }</p>
+<p>这7行中，部分行还不存在或者需要修改，逐个说明:</p>
+<p>首先是第一行 listen 443 http2; 作用是启用 Nginx 的 ngxhttpv2_module 模块支持 HTTP2，Nginx 版本需要高于 1.9.5，且编译时需要设置 –with-http_v2_module。</p>
+<p>ssl on;代表开启ssl，可以附加在第一行，即listen 443 http2 ssl;也是同样的作用。</p>
+<p>ssl_certificate 和 ssl_certificate_key ，分别对应 fullchain.pem 和 privkey.pem，这2个文件是之前就生成好的证书和密钥。</p>
+<p>ssl_dhparam 通过下面命令生成：(但是实际上并不需要)</p>
+<blockquote>
+<h1 id="mkdiretcnginxssl">mkdir /etc/nginx/ssl</h1>
+<h1 id="openssldhparamoutetcnginxssldhparampem2048">openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048</h1>
+</blockquote>
+<p>(与上一步一样，可选) ssl_trusted_certificate 需要下载 Let’s Encrypt 的 Root Certificates，但是我们的ssl_certificate 已经包含了 intermediates 不再需要提供 ssl_trusted_certificate，这一步可以省略：</p>
+<blockquote>
+<h1 id="cdetcletsencryptliveexamplecom">cd /etc/letsencrypt/live/example.com</h1>
+<h1 id="wgethttpsletsencryptorgcertsisrgrootx1pem">wget <a href="https://letsencrypt.org/certs/isrgrootx1.pem">https://letsencrypt.org/certs/isrgrootx1.pem</a></h1>
+<h1 id="mvisrgrootx1pemrootpem">mv isrgrootx1.pem root.pem</h1>
+<h1 id="catrootpemchainpemroot_ca_cert_plus_intermediates">cat root.pem chain.pem &gt; root_ca_cert_plus_intermediates</h1>
+</blockquote>
+<p>resolver 的作用是 “resolve names of upstream servers into addresses”， 在這個配置中，resolver 是用來解析 OCSP 服務器的域名的，建议填写VPS 提供商的 DNS 服务器，或者域名提供商的域名解析服务器，例如万网：</p>
+<p>resolver dns9.hichina.com dns10.hichina.com;</p>
+<p>Nginx 配置完成后，重启后，用浏览器测试是否一切正常。</p>
+<blockquote>
+<h1 id="systemctlreloadnginx">systemctl reload nginx</h1>
+<h1 id="systemctlrestartnginx">systemctl restart nginx</h1>
+</blockquote>
+<p>这时候站点应该默认强制使用了 HTTPS，并且浏览器地址栏左边会有绿色的小锁：</p>
+<p>5.自动化定期更新证书<br>
+Let’s Encrypt 证书有效期是3个月，可以通过 certbot 来自动化续期。</p>
+<p>通过 systemd 来自动执行证书续期任务:</p>
+<h1 id="vimusrlibsystemdsystemautorenewserviceunitdescriptionletsencryptrenewalservicetypesimpleexecstartusrbincertbotrenewquietagreetosexecstartpostbinsystemctlrestartnginxserviceinstallwantedbymultiusertarget">vim /usr/lib/systemd/system/autorenew.service [Unit] Description=Let's Encrypt renewal [Service] Type=simple ExecStart=/usr/bin/certbot renew --quiet --agree-tos #启动包含的指令 ExecStartPost=/bin/systemctl restart nginx.service #启动成功后需要执行的指令 [Install] WantedBy=multi-user.target</h1>
+<p>由于服务需要和定时器Timer做关联，要将Type设置为simple而不是oneshot，不然在执行后系统会以为不需要再次运行而关掉定时器</p>
+<p>然后增加一个 systemd timer 来触发这个服务：</p>
+<h1 id="vimetcsystemdsystemautorenewtimerunitdescriptionmonthlyrenewalofletsencryptscertificatestimeronbootsec5minonunitactivesec30dayunitautorenewserviceinstallwantedbymultiusertarget">vim /etc/systemd/system/autorenew.timer [Unit] Description=Monthly renewal of Let's Encrypt's certificates [Timer] OnBootSec=5min OnUnitActiveSec=30day Unit=autorenew.service [Install] WantedBy=multi-user.target</h1>
+<p>OnBootSec设定在系统启动后多长时间后开始第一次执行，服务器上运行着网站和数据库服务，为了减少在系统启动时的负载，设置为系统启动5分钟之后。如果开启服务时已启动，那么从服务启动时开始计算5分钟后执行</p>
+<p>OnUnitActiveSec设定定时器运行周期，设置为30天。</p>
+<p>Unit制定执行体，指向autorenew.service。<br>
+启用服务，开启 timer：</p>
+<blockquote>
+<h1 id="systemctldaemonreload">systemctl daemon-reload 重载配置文档</h1>
+<h1 id="systemctlenableautorenewserviceetcsystemdsystemautorenewtimertimercdetcsystemdsystemlnsusrlibsystemdsystemautorenewservice">systemctl enable autorenew.service # 在/etc/systemd/system/建立autorenew.timer的软链接，并启用成可启动状态，等待timer激活，等同于cd /etc/systemd/system/;ln -s /usr/lib/systemd/system/autorenew.service</h1>
+<h1 id="systemstlenableautorenewtimertimer">systemstl enable autorenew.timer # 启用timer</h1>
+<h1 id="systemctlstartautorenewtimer">systemctl start autorenew.timer</h1>
+</blockquote>
+<p>上面两条命令执行完毕后，可以通过 systemctl list-timers 列出所有 systemd 定时服务。当中可以找到 letsencrypt.timer 并看到运行时间是四星期之后(因为刚刚执行过一次)。<br>
+</p>
+<blockquote>
+<h1 id="systemctlstatusautorenewservice">systemctl status autorenew.service</h1>
+</blockquote>
+<p><br>
+启动后的状态如图，是未激活状态，实际是等待timer来激活，到此基本就可以不用担心证书过期了。</p>
+</div>
+
+            </section>
+
+        </article>
+    </main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="../../">admin</a> © 2018</section>
+        <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+    </footer>
+</body>

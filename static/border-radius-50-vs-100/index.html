@@ -1,0 +1,341 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Border-radius: 50% vs 100%</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=b76bda3809">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="admin">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Border-radius: 50% vs 100%">
+    <meta property="og:description" content="Border-radius 50% versus 100% 之前使用的border-radius一直是50%，100%混搭，虽然有所意识但是一直没有深入的了解 border-radius的机理，大概知道是怎么用，但是没有认真阅读过文档，不了解细节。所以趁这次遇到的问题，是时候思考一下为什么两者实际应用并没有什么区别的问题。 哪怕是对所谓的无关紧要的、日常又反复使用的属性，我自己也有可能只是知其皮毛，无知其所以然，真的感觉对细节的钻研和掌握才是日后CSS提高的关键。Good habbit to ask why! CSS创作圆形图标 在浏览网站的时候经常可以看到圆形，可能是个人简介的图片，也可能只当作背景。 就比如下图： 通常情况在页面利用CSS：border-radius展示圆形，一般创建方形元素，然后对其应用border-radius属性，而50%-100%的 属性都可以绘制圆形。50%可以绘制圆形很容易理解，因为应用属性的对象是方形元素，长度宽度相等，当绘制的边半径是border-box的一半是，体现出来的就是一个圆角。这就是绘制圆形的过程。 下图是一个150pixel的正方形元素，对四个角应用border属性50%。根据W3C border文档。当元素border属性是百分比值，那就是相对于border-box的宽高百分比。">
+    <meta property="og:url" content="http://10.0.2.15:2373/border-radius-50-vs-100/">
+    <meta property="article:published_time" content="2016-11-03T08:45:45.000Z">
+    <meta property="article:modified_time" content="2016-11-14T01:59:06.000Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Border-radius: 50% vs 100%">
+    <meta name="twitter:description" content="Border-radius 50% versus 100% 之前使用的border-radius一直是50%，100%混搭，虽然有所意识但是一直没有深入的了解 border-radius的机理，大概知道是怎么用，但是没有认真阅读过文档，不了解细节。所以趁这次遇到的问题，是时候思考一下为什么两者实际应用并没有什么区别的问题。 哪怕是对所谓的无关紧要的、日常又反复使用的属性，我自己也有可能只是知其皮毛，无知其所以然，真的感觉对细节的钻研和掌握才是日后CSS提高的关键。Good habbit to ask why! CSS创作圆形图标 在浏览网站的时候经常可以看到圆形，可能是个人简介的图片，也可能只当作背景。 就比如下图： 通常情况在页面利用CSS：border-radius展示圆形，一般创建方形元素，然后对其应用border-radius属性，而50%-100%的 属性都可以绘制圆形。50%可以绘制圆形很容易理解，因为应用属性的对象是方形元素，长度宽度相等，当绘制的边半径是border-box的一半是，体现出来的就是一个圆角。这就是绘制圆形的过程。 下图是一个150pixel的正方形元素，对四个角应用border属性50%。根据W3C border文档。当元素border属性是百分比值，那就是相对于border-box的宽高百分比。">
+    <meta name="twitter:url" content="http://10.0.2.15:2373/border-radius-50-vs-100/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="admin">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "Border-radius: 50% vs 100%",
+    "url": "http://10.0.2.15:2373/border-radius-50-vs-100/",
+    "datePublished": "2016-11-03T08:45:45.000Z",
+    "dateModified": "2016-11-14T01:59:06.000Z",
+    "description": "Border-radius 50% versus 100% 之前使用的border-radius一直是50%，100%混搭，虽然有所意识但是一直没有深入的了解 border-radius的机理，大概知道是怎么用，但是没有认真阅读过文档，不了解细节。所以趁这次遇到的问题，是时候思考一下为什么两者实际应用并没有什么区别的问题。 哪怕是对所谓的无关紧要的、日常又反复使用的属性，我自己也有可能只是知其皮毛，无知其所以然，真的感觉对细节的钻研和掌握才是日后CSS提高的关键。Good habbit to ask why! CSS创作圆形图标 在浏览网站的时候经常可以看到圆形，可能是个人简介的图片，也可能只当作背景。 就比如下图： 通常情况在页面利用CSS：border-radius展示圆形，一般创建方形元素，然后对其应用border-radius属性，而50%-100%的 属性都可以绘制圆形。50%可以绘制圆形很容易理解，因为应用属性的对象是方形元素，长度宽度相等，当绘制的边半径是border-box的一半是，体现出来的就是一个圆角。这就是绘制圆形的过程。 下图是一个150pixel的正方形元素，对四个角应用border属性50%。根据W3C border文档。当元素border属性是百分比值，那就是相对于border-box的宽高百分比。",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.js?v=b76bda3809"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c468a4ccc290"
+});
+</script>
+    <meta name="generator" content="Ghost 1.24">
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../rss/index.html">
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="admin"></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://10.0.2.15:2373/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2016-11-03">3 November 2016</time>
+                </section>
+                <h1 class="post-full-title">Border-radius: 50% vs 100%</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><p><img src="http://www.wavejs.com/content/images/2016/11/border-radius.jpg" alt="border-radius"></p>
+<h2 id="borderradius50versus100">Border-radius 50% versus 100%</h2>
+<p>之前使用的border-radius一直是50%，100%混搭，虽然有所意识但是一直没有深入的了解 border-radius的机理，大概知道是怎么用，但是没有认真阅读过文档，不了解细节。所以趁这次遇到的问题，是时候思考一下为什么两者实际应用并没有什么区别的问题。</p>
+<p>哪怕是对所谓的无关紧要的、日常又反复使用的属性，我自己也有可能只是知其皮毛，无知其所以然，真的感觉对细节的钻研和掌握才是日后CSS提高的关键。Good habbit to ask why!</p>
+<h2 id="css">CSS创作圆形图标</h2>
+<p>在浏览网站的时候经常可以看到圆形，可能是个人简介的图片，也可能只当作背景。<br>
+就比如下图：<br>
+<img src="http://www.wavejs.com/content/images/2016/11/border-radius2.jpg" alt="border-radius2"><br>
+通常情况在页面利用CSS：border-radius展示圆形，一般创建方形元素，然后对其应用border-radius属性，而50%-100%的 属性都可以绘制圆形。50%可以绘制圆形很容易理解，因为应用属性的对象是方形元素，长度宽度相等，当绘制的边半径是border-box的一半是，体现出来的就是一个圆角。这就是绘制圆形的过程。</p>
+<p>下图是一个150pixel的正方形元素，对四个角应用border属性50%。根据W3C <a href="https://www.w3.org/TR/2010/WD-css3-background-20100612/#the-border-radius">border文档</a>。当元素border属性是百分比值，那就是相对于border-box的宽高百分比。所以在元素宽高都是150px,那圆角半径50%就是75px</p>
+<hr>
+<p><img src="http://www.wavejs.com/content/images/2016/11/border-radius.jpg" alt="border-radius">- - - - - -</p>
+<p>虽然50%可以实现圆角，但也只是针对方形元素。在之前的使用中，我也使用100%作为圆角处理，没仔细想，但是文档里看下来，50%和100%触发的机制是有很大不同的Lea Verou的Fluent 2014演讲 <a href="https://www.youtube.com/watch?v=JSaMl2OKjfQ">“The Humble Border-Radius”</a>中提到如果两个相邻的角的半径之和超过了该元素border-box的边长度，浏览器会重新计算两个角的半径确保它们不重合。所以如果如下图右二所示，圆角半径被设置为100%，那么整个圆角的半径就是150px,那么两个相邻圆角的半径和就是300px,这种情况是不允许的，出现此情况，浏览器会重新计算两个圆角的半径直至正好符合正方形的变长，也就是各自一半50%，同时说明浏览器允许这个正方形元素的最大圆角半径就是75px</p>
+<h2 id="">结论：</h2>
+<p>所有圆角半径即使被设置为100%,浏览器也会适当计算，并在初始容器中容纳所有的圆角。另外，超过50%的圆角半径对页面性能可能产生的影响，可能以后的文章中会有具体的测试。</p>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="http://10.0.2.15:2373/404/">admin</a></h4>
+            <p>0</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="http://10.0.2.15:2373/404/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../-e7-bd-91-e7-ab-99-e8-ae-bf-e9-97-ae-e6-80-a7-e8-83-bd-e6-8f-90-e5-8d-87-e6-9c-80-e4-bd-b3-e5-ae-9e-e8-b7-b5/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">网站访问性能提升最佳实践</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>核心：最小化HTTP请求 前端占终端用户响应时间达80%，而其中大部分的时间用于下载网页内容，例如图片，样式表，脚本和flash等。降低组件数量可以减少为渲染网页而发出的HTTP请求，也就是网页加速的关键。 其中一条可行的方法是简化网页设计，减少组件数量。但问题是是否可以构架具有丰富内容同时具有快速响应特性的网页呢？以下几个技巧就能帮我们实现快速、丰富内容的网页： 合并文件(combined files) 当网页的行为js文件与文档结构分离时，使用script标签引入外部js文件。 包含脚本的最佳方式是引入外部文件，而且浏览器也能对站点中的多个页面重用缓存过的相同脚本，但涉及引入多个文件时：              推荐的做法是将上述脚本文件合并到一个脚本文件中。这样，就可以减少加载页面时发送的请求数量。而减少请求数量往往是性能优化时优先考虑的问题。 通过合并所有脚本文件至一个文件减少HTTP请求数量，样式表也是同理。然而合并不同页面包含不同的脚本和样式表会具有相当大的挑战性，但采用文件合并可降低响应时间。 CSS Sprites CSS</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">4 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../urlsrc-e4-b8-8ehref-e7-9a-84-e5-8c-ba-e5-88-ab/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">URL,src与href的区别</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>URL(Uniform Resource Locator) 统一资源定位符是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。 结构 基本URL包含模式（或称协议）、服务器名称（或IP地址）、路径和文件名，如“协议://授权/路径?查询”。完整的、带有授权部分的普通统一资源标志符语法看上去如下：协议://用户名:密码@子域名.域名.顶级域名:端口号/目录/文件名.文件后缀?参数=值#</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">5 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../">
+            <span>admin</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">—</span>
+    <div class="floating-header-title">Border-radius: 50% vs 100%</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Border-radius%3A%2050%25%20vs%20100%25&amp;url=http://10.0.2.15:2373/border-radius-50-vs-100/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://10.0.2.15:2373/border-radius-50-vs-100/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../">admin</a> © 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=b76bda3809"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>

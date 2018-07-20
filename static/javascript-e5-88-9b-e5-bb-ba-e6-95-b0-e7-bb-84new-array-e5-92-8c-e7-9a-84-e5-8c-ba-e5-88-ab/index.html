@@ -1,0 +1,392 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Javascript创建数组:"new Array()"和"[]"的区别</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=b76bda3809">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="admin">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content='Javascript创建数组:"new Array()"和"[]"的区别'>
+    <meta property="og:description" content=".nope {background-color: grey;} 		.yes {background-color: green;color:white;} .blockquote-yellow {background-color:#FFF8D4 !important;} 	用过: var myArray = new Array(); 也用过: var myArray = []; 那么：区别在哪里？ 速度有区别吗？ 1.具体有什么区别？ 就声明一个空白数组(即上面的声明方式)而言这两种没有区别。但是在实际应用中还是有些区别，正是因为这些区别，我认为这两种方式中应该偏向用： var myArray = []; new Array()是比较语义化的创建方式，new Array(length)的参数length声明数组长度，然后生成该长度的空数组。 myArray = new Array(5); alert(myArray.length); // 5 而下面的例子中,">
+    <meta property="og:url" content="http://10.0.2.15:2373/javascript-e5-88-9b-e5-bb-ba-e6-95-b0-e7-bb-84new-array-e5-92-8c-e7-9a-84-e5-8c-ba-e5-88-ab/">
+    <meta property="article:published_time" content="2016-11-16T16:05:33.000Z">
+    <meta property="article:modified_time" content="2016-11-16T16:06:39.000Z">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content='Javascript创建数组:"new Array()"和"[]"的区别'>
+    <meta name="twitter:description" content=".nope {background-color: grey;} 		.yes {background-color: green;color:white;} .blockquote-yellow {background-color:#FFF8D4 !important;} 	用过: var myArray = new Array(); 也用过: var myArray = []; 那么：区别在哪里？ 速度有区别吗？ 1.具体有什么区别？ 就声明一个空白数组(即上面的声明方式)而言这两种没有区别。但是在实际应用中还是有些区别，正是因为这些区别，我认为这两种方式中应该偏向用： var myArray = []; new Array()是比较语义化的创建方式，new Array(length)的参数length声明数组长度，然后生成该长度的空数组。 myArray = new Array(5); alert(myArray.length); // 5 而下面的例子中,">
+    <meta name="twitter:url" content="http://10.0.2.15:2373/javascript-e5-88-9b-e5-bb-ba-e6-95-b0-e7-bb-84new-array-e5-92-8c-e7-9a-84-e5-8c-ba-e5-88-ab/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="admin">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "Javascript创建数组:&quot;new Array()&quot;和&quot;[]&quot;的区别",
+    "url": "http://10.0.2.15:2373/javascript-e5-88-9b-e5-bb-ba-e6-95-b0-e7-bb-84new-array-e5-92-8c-e7-9a-84-e5-8c-ba-e5-88-ab/",
+    "datePublished": "2016-11-16T16:05:33.000Z",
+    "dateModified": "2016-11-16T16:06:39.000Z",
+    "description": ".nope {background-color: grey;} \t\t.yes {background-color: green;color:white;} .blockquote-yellow {background-color:#FFF8D4 !important;} \t用过: var myArray &#x3D; new Array(); 也用过: var myArray &#x3D; []; 那么：区别在哪里？ 速度有区别吗？ 1.具体有什么区别？ 就声明一个空白数组(即上面的声明方式)而言这两种没有区别。但是在实际应用中还是有些区别，正是因为这些区别，我认为这两种方式中应该偏向用： var myArray &#x3D; []; new Array()是比较语义化的创建方式，new Array(length)的参数length声明数组长度，然后生成该长度的空数组。 myArray &#x3D; new Array(5); alert(myArray.length); // 5 而下面的例子中,",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.js?v=b76bda3809"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c468a4ccc290"
+});
+</script>
+    <meta name="generator" content="Ghost 1.24">
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../rss/index.html">
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="admin"></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://10.0.2.15:2373/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post no-image">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2016-11-16">16 November 2016</time>
+                </section>
+                <h1 class="post-full-title">Javascript创建数组:"new Array()"和"[]"的区别</h1>
+            </header>
+
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><style>
+		.nope {background-color: grey;}
+		.yes {background-color: green;color:white;}
+.blockquote-yellow {background-color:#FFF8D4 !important;}
+	</style>用过:
+<blockquote>
+<p>var myArray = new Array();</p>
+</blockquote>
+<p>也用过:</p>
+<blockquote>
+<p>var myArray = [];</p>
+</blockquote>
+<h2 id="">那么：区别在哪里？ 速度有区别吗？</h2>
+<h3 id="1">1.具体有什么区别？</h3>
+<p>就声明一个空白数组(即上面的声明方式)而言这两种没有区别。但是在实际应用中还是有些区别，正是因为这些区别，我认为这两种方式中应该偏向用：</p>
+<blockquote>
+<p>var myArray = [];</p>
+</blockquote>
+<p>new Array()是比较语义化的创建方式，new Array(length)的参数length声明数组长度，然后生成该长度的空数组。</p>
+<blockquote>
+<p>myArray = new Array(5);<br>
+alert(myArray.length); // 5</p>
+</blockquote>
+<p>而下面的例子中,两者略有不同:</p>
+<blockquote>
+<p>var a = [], // these are the same<br>
+b = new Array(), // a and b are arrays with length 0</p>
+<p>c = [‘foo’, ‘bar’], // these are the same<br>
+d = new Array(‘foo’, ‘bar’), // c and d are arrays with 2 strings</p>
+<p>// these are different:<br>
+e = [3] // e.length == 1, e[0] == 3<br>
+f = new Array(3), // f.length == 3, f[0] == undefined<br>
+;</p>
+</blockquote>
+<p>而实际上，两种创建数组的方式在编程中又有微妙但是重要的区别：</p>
+<blockquote>
+<p>var a = [];</p>
+</blockquote>
+<p>直接创建数组，调用解释器创建，没有额外的部分参与创建过程。</p>
+<blockquote>
+<p>var a = new Array();</p>
+</blockquote>
+<p>调用Array()创建数组，看起来没什么区别，但是万一程序中Array()被重新定义，那就不一样：</p>
+<blockquote>
+<p>function Array() {<br>
+this.is = ‘SPARTA’;<br>
+}</p>
+<p>var a = new Array();<br>
+var b = [];</p>
+<p>alert(a.is); // =&gt; ‘new Array’<br>
+alert(b.is); // =&gt; undefined<br>
+a.push(‘Woa’); // =&gt; TypeError: a.push is not a function<br>
+b.push(‘Woa’); // =&gt; 1 (OK)</p>
+</blockquote>
+<p>第一个输出’new Array’，第二个不会；当利用push时，也会发现两者的不同。</p>
+<p>这个例子只是说明Array()被重新定义带来的问题，其实并不常见。</p>
+<p>More:<br>
+这篇文章<a href="http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/">链接</a>中提到：</p>
+<blockquote>
+<p>You never need to use new Object() in JavaScript. Use the object literal {} instead. Similarly, don’t use new Array(), use the array literal [] instead. Arrays in JavaScript work nothing like the arrays in Java, and use of the Java-like syntax will confuse you.</p>
+<p>Do not use new Number, new String, or new Boolean. These forms produce unnecessary object wrappers. Just use simple literals instead.</p>
+</blockquote>
+<h3 id="2">2.速度有区别吗？</h3>
+<p>有区别！<br>
+在nodejs中测试得出的结果显示：</p>
+<table><thead><tr><td>数组长度范围</td><td>“new Array”</td><td>“[]”</td></tr></thead><tbody><tr><td>0</td><td class="yes">Yes!Faster</td><td class="nope">Nope</td></tr><tr><td>size &gt; ~1000</td><td class="nope">Nope</td><td class="yes">Yes!Faster</td></tr></tbody></table>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="http://10.0.2.15:2373/404/">admin</a></h4>
+            <p>0</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="http://10.0.2.15:2373/404/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../addloadevent-e4-b8-8ewindow-onload-e4-ba-8b-e4-bb-b6/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">addLoadEvent与window.onload事件</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>.valignSuper { 		vertical-align: super; 	}	.tdGreen { 		background-color:green!important; 		color:white!important; 	}	.tdGrey { 		background-color:grey!important; 		color:white!important; 	}         .pre-line {                 white-space:pre-line;         } var tdYes = document.getElementsByClassName('yes'); for(var i=0;i&lt;tdYes.length;</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">2 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../javascript-e4-b8-ad-e7-9a-84-e5-8f-98-e9-87-8f-e6-8f-90-e5-89-8d-e8-a1-8c-e4-b8-bahoist-e7-ae-80-e6-9e-90/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Javascript中的变量提前行为(Hoist)简析</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>Javascript有一个很神奇的行为：变量声明提前（Hoist） 变量申明提前 Javascript语法看起来很类似C，Java，C#，之前上学时曾经学过的C和Java都需要先声明变量，再使用变量，若变量在使用前没有定义，那么在编译阶段会报错。但是，Javascript就可以在声明之前就可以用，那是为什么呢？ function() { //ReferenceError: noSuchVariable is not defined console.log(noSuchVariable); } 上述代码运行报错，原因是noSuchVariable没有定义。 那么以下的代码： function() { // Outputs: undefined console.log(declaredLater); var</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">3 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../">
+            <span>admin</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">—</span>
+    <div class="floating-header-title">Javascript创建数组:"new Array()"和"[]"的区别</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Javascript%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84%3A%22new%20Array()%22%E5%92%8C%22%5B%5D%22%E7%9A%84%E5%8C%BA%E5%88%AB&amp;url=http://10.0.2.15:2373/javascript-e5-88-9b-e5-bb-ba-e6-95-b0-e7-bb-84new-array-e5-92-8c-e7-9a-84-e5-8c-ba-e5-88-ab/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://10.0.2.15:2373/javascript-e5-88-9b-e5-bb-ba-e6-95-b0-e7-bb-84new-array-e5-92-8c-e7-9a-84-e5-8c-ba-e5-88-ab/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../">admin</a> © 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=b76bda3809"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>

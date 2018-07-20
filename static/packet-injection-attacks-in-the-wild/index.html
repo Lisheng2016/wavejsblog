@@ -1,0 +1,389 @@
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Packet Injection Attacks in the Wild</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="../assets/built/screen.css?v=b76bda3809">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <link rel="amphtml" href="amp/index.html">
+    
+    <meta property="og:site_name" content="admin">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Packet Injection Attacks in the Wild">
+    <meta property="og:description" content="p {text-indent:2em;}**之前曾发过关于数据包注入攻击的博客，例如：“[Chinese DDoS of GitHub](http://netres.ec/?b=153DB4E)” 和 “[Covert Man-on-the-Side Attacks](http://netres.ec/?b=1598A63)”。这次跟和大家分享一些来自真实世界已经持续了好几个月，而且至今依旧非常活跃的数据包注入攻击实例。** 网络运营商的数据包注入 Gabi Nakibly，Jaime Schcolnik 和 Yossi Rubin 最近发表了一篇非常有趣的论文名为“Website-Targeted False Content Injection by Network Operators（来自网络运营商注入的虚假内容）”，论文中分析了全球各地存在的包注入攻击，下面是论文的部分摘要内容： [论文下载链接](http://sheepsoft.cn/testpages/Website-Targeted">
+    <meta property="og:url" content="http://10.0.2.15:2373/packet-injection-attacks-in-the-wild/">
+    <meta property="og:image" content="http://www.wavejs.com/content/images/2016/09/CapLoader_Transcript_hao123_520x723-2-520x576-1-e1475378227344.png">
+    <meta property="article:published_time" content="2016-09-22T18:11:58.000Z">
+    <meta property="article:modified_time" content="2016-10-02T03:17:28.000Z">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Packet Injection Attacks in the Wild">
+    <meta name="twitter:description" content="p {text-indent:2em;}**之前曾发过关于数据包注入攻击的博客，例如：“[Chinese DDoS of GitHub](http://netres.ec/?b=153DB4E)” 和 “[Covert Man-on-the-Side Attacks](http://netres.ec/?b=1598A63)”。这次跟和大家分享一些来自真实世界已经持续了好几个月，而且至今依旧非常活跃的数据包注入攻击实例。** 网络运营商的数据包注入 Gabi Nakibly，Jaime Schcolnik 和 Yossi Rubin 最近发表了一篇非常有趣的论文名为“Website-Targeted False Content Injection by Network Operators（来自网络运营商注入的虚假内容）”，论文中分析了全球各地存在的包注入攻击，下面是论文的部分摘要内容： [论文下载链接](http://sheepsoft.cn/testpages/Website-Targeted">
+    <meta name="twitter:url" content="http://10.0.2.15:2373/packet-injection-attacks-in-the-wild/">
+    <meta name="twitter:image" content="http://www.wavejs.com/content/images/2016/09/CapLoader_Transcript_hao123_520x723-2-520x576-1-e1475378227344.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="admin">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "admin",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "admin",
+        "url": "http://10.0.2.15:2373/404/",
+        "sameAs": []
+    },
+    "headline": "Packet Injection Attacks in the Wild",
+    "url": "http://10.0.2.15:2373/packet-injection-attacks-in-the-wild/",
+    "datePublished": "2016-09-22T18:11:58.000Z",
+    "dateModified": "2016-10-02T03:17:28.000Z",
+    "image": "http://www.wavejs.com/content/images/2016/09/CapLoader_Transcript_hao123_520x723-2-520x576-1-e1475378227344.png",
+    "description": "p {text-indent:2em;}**之前曾发过关于数据包注入攻击的博客，例如：“[Chinese DDoS of GitHub](http://netres.ec/?b&#x3D;153DB4E)” 和 “[Covert Man-on-the-Side Attacks](http://netres.ec/?b&#x3D;1598A63)”。这次跟和大家分享一些来自真实世界已经持续了好几个月，而且至今依旧非常活跃的数据包注入攻击实例。** 网络运营商的数据包注入 Gabi Nakibly，Jaime Schcolnik 和 Yossi Rubin 最近发表了一篇非常有趣的论文名为“Website-Targeted False Content Injection by Network Operators（来自网络运营商注入的虚假内容）”，论文中分析了全球各地存在的包注入攻击，下面是论文的部分摘要内容： [论文下载链接](http://sheepsoft.cn/testpages/Website-Targeted",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://10.0.2.15:2373/"
+    }
+}
+    </script>
+
+    <script src="../public/ghost-sdk.js?v=b76bda3809"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c468a4ccc290"
+});
+</script>
+    <meta name="generator" content="Ghost 1.24">
+    <link rel="alternate" type="application/rss+xml" title="admin" href="../rss/index.html">
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+
+        
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+                <a class="site-nav-logo" href="../"><img src="https://casper.ghost.org/v1.0.0/images/ghost-logo.svg" alt="admin"></a>
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="../">Home</a></li>
+</ul>
+
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+        </div>
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/http://10.0.2.15:2373/rss/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"></circle><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"></path></svg>
+</a>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="2016-09-22">22 September 2016</time>
+                </section>
+                <h1 class="post-full-title">Packet Injection Attacks in the Wild</h1>
+            </header>
+
+            <figure class="post-full-image" style="background-image: url(http://www.wavejs.com/content/images/2016/09/CapLoader_Transcript_hao123_520x723-2-520x576-1-e1475378227344.png)">
+            </figure>
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown"><style>
+  p {text-indent:2em;}<br /></style><div class="container" style="width: 100%;"><div id="contenttxt" style="position: relative; top: 0px; left: 0; width: 90%;">**之前曾发过关于数据包注入攻击的博客，例如：“[Chinese DDoS of GitHub](http://netres.ec/?b=153DB4E)” 和 “[Covert Man-on-the-Side Attacks](http://netres.ec/?b=1598A63)”。这次跟和大家分享一些来自真实世界已经持续了好几个月，而且至今依旧非常活跃的数据包注入攻击实例。**
+<h2 id="">网络运营商的数据包注入</h2>
+<p>Gabi Nakibly，Jaime Schcolnik 和 Yossi Rubin 最近发表了一篇非常有趣的论文名为“<a href="http://arxiv.org/abs/1602.07128">Website-Targeted False Content Injection by Network Operators</a>（来自网络运营商注入的虚假内容）”，论文中分析了全球各地存在的包注入攻击，下面是论文的部分摘要内容：</p>
+<p>[论文下载链接](<a href="http://sheepsoft.cn/testpages/Website-Targeted">http://sheepsoft.cn/testpages/Website-Targeted</a> False Content Injection by Network Operators.pdf )</p>
+<blockquote>
+<p>实际上一些网络运营商会向用户的网络流量中注入虚假的内容。然而，几乎以前所有的进展都集中在ISP边缘 ，即那些直接提供互联网接入用户的位置。来自边缘 ISP 的包注入只会影响到他们的用户。然而，在工作中发现的不仅仅边缘的网络运营商会进行包注入，核心网络运营商也会这么做。这些运营商可能会改变访问预定网站所有用户的流量。</p>
+</blockquote>
+<p>研究人员分析了 1.4PB 的HTTP流量，这些流量抓取自四个地方，三所大学和一家公司。他们提供了部分匿名的PCAP文件<a href="http://www.cs.technion.ac.il/~gnakibly/TCPInjections/samples.zip">文件给予下载</a>。</p>
+<p>尝试通过访问同样的 URL 来重建这些数据包时运气不好，大部分的数据包都没有收到任何注入响应。不过，最后还是触发了两组论文中发生的注入响应（“hao” and “GPWA”）。</p>
+<h2 id="hao360cnhao123com">重定向 hao.360.cn 到 hao123.com</h2>
+<p>在访问网站 <a href="http://www.02995.com">www.02995.com</a> 时获取到了非常可靠的注入包。以下是PCAP文件<a href="https://www.netresec.com/files/hao123-com_packet-injection.pcap">包含注入的 PCAP 文件</a>。</p>
+<p>将 PCAP 文件加载到 <a href="https://www.netresec.com/?page=CapLoader">CapLoader</a> 里，对第一个 TCP 会话点击 “Flow Transcript” 即可看到如下：</p>
+<p><img src="http://www.wavejs.com/content/images/2016/09/CapLoader_Transcript_hao123_520x723-2.png" alt=""></p>
+<p>从上面的截图中可以看到，客户端请求访问 <a href="http://www.02995.com/">http://www.02995.com/</a> 但收到了两个具有相同序列号(3820080905)的不同相应包。</p>
+<blockquote>
+<p>第一个响应是 “302 Found”，跳转客户端到：<a href="http://www.hao123.com/?tn=93803173_s_hao_pg">http://www.hao123.com/?tn=93803173_s_hao_pg</a></p>
+<p>第二个响应是 “302 Moved Temporarily”，试图重定向到：<a href="http://hao.360.cn/?src=lm&amp;ls=n4a2f6f3a91">http://hao.360.cn/?src=lm&amp;ls=n4a2f6f3a91</a></p>
+</blockquote>
+<p>从 IP 的存活时间(TTL) 上来判断，可认为第一个响应 (hao123.com) 是注入包，而第二个包 (hao.360.cn) 是从 <a href="http://www.02995.com">www.02995.com</a> 服务器返回的真实响应数据包。</p>
+<p>如果观察仔细，则发现注入的数据包没有使用标准的 CR-LF (0x0d 0x0a) 分割 HTTP 响应，注入包中只使用了 LF (0x0a) 作为 HTTP 头部的换行。</p>
+<p>由于注入包先于真正的相应数据包，所以客户端被注入重定向到 <a href="http://www.hao123.com">www.hao123.com</a>。下面是浏览器试图加载 <a href="http://www.02995.com">www.02995.com</a> 的截图：</p>
+<p><img src="http://www.wavejs.com/content/images/2016/09/hao123-com_520x410-1.png" alt=""></p>
+<p>SSL 加密是对数据包注入攻击的一种有效防护方式。所以当用户输入 <strong>https</strong>://<a href="http://www.02995.com">www.02995.com</a> 时浏览器会遵循<strong>真实</strong>的重定向到 hao.360.cn</p>
+<p><img src="http://www.wavejs.com/content/images/2016/09/hao-360-cn_520x364-1.png" alt=""></p>
+<h2 id="id1cnbatitaliyuncom">id1.cn 重定向到 batit.aliyun.com</h2>
+<p>在 Gabi 等人论文公开的 PCAP 文件中展示一个真实世界的包注入攻击，PCAP 文件<a href="https://github.com/fox-it/quantuminsert/blob/master/presentations/brocon2015/pcaps/id1.cn-inject.pcap">下载链接</a>。</p>
+<p>这个 PCAP 文件由 Yun Zheng Hu (Fox-IT) 在 BroCon 2015的报告 “Detecting Quantum Insert” 中公开出来的。下面一个视频录像记录了 Yun Zheng 当时的演讲，包括一个 demo 演示包注入攻击（译者注：演示开始于视频33分56秒）。</p>
+<iframe frameborder="0" height="150" src="http://v.qq.com/iframe/player.html?vid=g01879102i6&amp;tiny=0&amp;auto=0" width="300"><br>  
+</iframe>
+<p>通过访问 <a href="http://id1.cn">http://id1.cn</a> 试图重新触发这个包注入攻击，随后收到两个 注入的 HTTP 响应试图重定向到 <a href="http://batit.aliyun.com/alww.html">http://batit.aliyun.com/alww.html</a> 。被注入后跳转到的页面上有一段来自阿里巴巴集团 (aliyun.com) 的消息说目标网站已被屏蔽。</p>
+<p><img src="http://www.wavejs.com/content/images/2016/09/id1-cn_aliyun-com_520x304-1.png" alt=""></p>
+<p>同样准备分享这个针对 id1.cn 包注入攻击的 PCAP 文件：<a href="https://www.netresec.com/files/id1-cn_packet-injection.pcap">https://www.netresec.com/files/id1-cn_packet-injection.pcap</a>。</p>
+<p>使用 <a href="http://www.netresec.com/?page=Networkminer">NetworkMiner Professional</a> 打开这个 PCAP 文件后，打开 <a href="http://netres.ec/?b=162EF93">Browsers选项卡</a> 来分析多个 HTTP 重定向：</p>
+<p><img src="http://www.wavejs.com/content/images/2016/09/NetworkMiner_Professional_2-0_Browsers_id1-cn_520x298-1.png" alt=""></p>
+<p>下面是对 id1.cn 攻击 PCAP 包中的一些要点：</p>
+<blockquote>
+<p>1. <strong>Frame 13</strong>：打开 <a href="http://id1.cn">http://id1.cn</a></p>
+<p>2. <strong>Frame 18</strong>：真实服务器返回响应，刷新 HTML 到 <a href="http://id1.cn/rd.s/Btc5n4unOP4UrIfE?url=http://id1.cn/">http://id1.cn/rd.s/Btc5n4unOP4UrIfE?url=http://id1.cn/</a></p>
+<p>3. <strong>Frame 20</strong>：客户端收到两个注入包试图显示 “403 Forbidden” 并将页面重定向到 <a href="http://batit.aliyun.com/alww.html">http://batit.aliyun.com/alww.html</a> 。然而注入包抵达时间比真实数据包晚了。</p>
+<p>4. <strong>Frame 24</strong>：客户端进程加载 <a href="http://id1.cn/rd.s/Btc5n4unOP4UrIfE?url=http://id1.cn/">http://id1.cn/rd.s/Btc5n4unOP4UrIfE?url=http://id1.cn/</a></p>
+<p>5. <strong>Frame 25</strong>：出现两个新的注入响应，这次成功将客户端重定位到阿里巴巴的页面。</p>
+<p>6. <strong>Frame 28</strong>：真实响应包抵达晚了。</p>
+<p>7. <strong>Frame 43</strong>：用户打开阿里巴巴的页面收到提示信息网站被屏蔽了。</p>
+</blockquote>
+<h2 id="">防止包注入攻击</h2>
+<p>最好防止 TCP 包注入攻击的方法就是使用 SSL 加密。依靠网站 HTTP 进行重定向到 HTTPS url 是远远不够的，因为这个重定向同样可能遭受包注入攻击，所以确保使用 “https://”（或者使用一个浏览器插件），从而避免遭受 TCP 包注入的影响。</p>
+<h2 id="">相关抓包文件</h2>
+<p>下面是本文包含 PCAP 文件的汇总：</p>
+<p><a href="http://www.cs.technion.ac.il/~gnakibly/TCPInjections/samples.zip">http://www.cs.technion.ac.il/~gnakibly/TCPInjections/samples.zip</a></p>
+<p><a href="https://www.netresec.com/files/hao123-com_packet-injection.pcap">https://www.netresec.com/files/hao123-com_packet-injection.pcap</a></p>
+<p><a href="https://github.com/fox-it/quantuminsert/blob/master/presentations/brocon2015/pcaps/id1.cn-inject.pcap">https://github.com/fox-it/quantuminsert/blob/master/presentations/brocon2015/pcaps/id1.cn-inject.pcap</a></p>
+<p><a href="https://www.netresec.com/files/id1-cn_packet-injection.pcap">https://www.netresec.com/files/id1-cn_packet-injection.pcap</a></p>
+<p>更多的 PCAP 文件，可以访问 Netresec 公共 PCAP 文件列表下载：<a href="https://www.netresec.com/?page=PcapFiles">https://www.netresec.com/?page=PcapFiles</a></p>
+</div></div>
+</div>
+            </section>
+
+
+            <footer class="post-full-footer">
+
+
+                    
+<section class="author-card">
+        <span class="avatar-wrapper"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</span>
+    <section class="author-card-content">
+        <h4 class="author-card-name"><a href="http://10.0.2.15:2373/404/">admin</a></h4>
+            <p>0</p>
+    </section>
+</section>
+<div class="post-full-footer-right">
+    <a class="author-card-button" href="http://10.0.2.15:2373/404/">Read More</a>
+</div>
+
+
+            </footer>
+
+
+        </article>
+
+    </div>
+</main>
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+
+                <article class="post-card post">
+        <a class="post-card-image-link" href="../davegrohl-crack-osx_userpasswd/">
+            <div class="post-card-image" style="background-image: url(http://www.wavejs.com/content/images/2016/09/crack-finished-1-1024x691-1-e1475376692573.png)"></div>
+        </a>
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../davegrohl-crack-osx_userpasswd/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">DaveGrohl Crack OSX/Userpasswd</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>div.method		{			width:750px;			height:5000px;			background-color:#CCC;			/*position:relative;*/		}		.square		{			background-color:lightgreen;			display:inline-block;			width:30px;			height:30px;			margin-left:20px;			/*position:absolute;*/		}		h1.method		{			display:inline-block;			vertical-align:4px;			margin-left:10px;			/*background-color:lightgray;</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">6 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+                <article class="post-card post no-image">
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="../create-windows-executable-exe-from-python-script/">
+            <header class="post-card-header">
+                <h2 class="post-card-title">Create windows executable (.exe) from Python Script</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>p {margin-left:1em;/*color:black;*/}   a.exe:link {color:brown;border:1px solid transparent;}   a.exe:hover {color:red;background:yellow;border-color:gray;border-style:outset;} Introduction Python is a simple and powerful language</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+
+            <ul class="author-list">
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        admin
+                    </div>
+
+                        <a href="http://10.0.2.15:2373/404/" class="static-avatar author-profile-image"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF"></path></g></svg>
+</a>
+                </li>
+            </ul>
+
+            <span class="reading-time">3 min read</span>
+
+        </footer>
+    </div>
+</article>
+
+        </div>
+    </div>
+</aside>
+
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="../">
+            <span>admin</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">—</span>
+    <div class="floating-header-title">Packet Injection Attacks in the Wild</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"></path>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Packet%20Injection%20Attacks%20in%20the%20Wild&amp;url=http://10.0.2.15:2373/packet-injection-attacks-in-the-wild/" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"></path></svg>
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=http://10.0.2.15:2373/packet-injection-attacks-in-the-wild/" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"></path></svg>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="../">admin</a> © 2018</section>
+                <nav class="site-footer-nav">
+                    <a href="../">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=b76bda3809"></script>
+
+
+    <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+
+});
+</script>
+
+
+    
+
+</body>
