@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/"><channel><title><![CDATA[kb.wavejs.com]]></title><description><![CDATA[Enhancing Ability with Linux and Beyond]]></description><link>http://10.0.1.18:2373/</link><image><url>http://10.0.1.18:2373/favicon.png</url><title>kb.wavejs.com</title><link>http://10.0.1.18:2373/</link></image><generator>Ghost 1.24</generator><lastBuildDate>Fri, 24 Aug 2018 12:26:03 GMT</lastBuildDate><atom:link href="http://10.0.1.18:2373/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[tcp flags switch in iptables: Usage]]></title><description><![CDATA[<div class="kg-card-markdown"><p>The --tcp-flags switch takes two arguments only. The first argument is which flags to check. The second argument is the flags from the first argument that should be set for a match. Thus your line:</p>
+<p>-p tcp --tcp-flags SYN,ACK,FIN,RST SYN -j DROP</p>
+<p>Is saying: &quot;Match if</p></div>]]></description><link>http://10.0.1.18:2373/tcp-flags-in-iptables/</link><guid isPermaLink="false">5b7fc973437f280dfb1c577e</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Fri, 24 Aug 2018 09:02:53 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>The --tcp-flags switch takes two arguments only. The first argument is which flags to check. The second argument is the flags from the first argument that should be set for a match. Thus your line:</p>
+<p>-p tcp --tcp-flags SYN,ACK,FIN,RST SYN -j DROP</p>
+<p>Is saying: &quot;Match if only the SYN flag is set from these four. (The space separates the first and second arguments.)</p>
+<p>-p tcp --tcp-flags ALL SYN -j DROP</p>
+<p>means check ALL flags and match those packets with nothing but SYN set. The third of your examples is bad syntax, since it gives three arguments. Your first rule would drop all new TCP connections coming in, which probably isn't what you want.</p>
+<p>The switch is mostly used to drop packets with meaningless TCP flags set. You wouldn't, for instance, get legitimate packets with both SYN and RST set, for instance or SYN and FIN. Take this snippet from one of my* firewall scripts:</p>
+<p>${IPTABLES} -t filter -A INETIN -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP<br>
+${IPTABLES} -t filter -A INETIN -p tcp --tcp-flags SYN,RST SYN,RST -j DROP<br>
+${IPTABLES} -t filter -A INETIN -p tcp --tcp-flags SYN,URG SYN,URG -j DROP</p>
+<p>These check for specific combinations of TCP flags that should never occur naturally and drop the packets.</p>
+<p>More reading at the man page.</p>
+</div>]]></content:encoded></item><item><title><![CDATA[iotop crashes when launching]]></title><description><![CDATA[<div class="kg-card-markdown"><p>uname -r</p>
+<p>3.10.0-862.3.3.el7.x86_64</p>
+<p>ERROR info</p>
+<blockquote>
+<pre><code>Traceback (most recent call last):
+File &quot;/sbin/iotop&quot;, line 17, in
+main()
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 620, in main
+main_loop()
+File &quot;/usr/lib/python2.7/site-packages/</code></pre></blockquote></div>]]></description><link>http://10.0.1.18:2373/iotop-crashes-when-launching/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2b3</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Wed, 04 Jul 2018 08:42:01 GMT</pubDate><media:content url="http://10.0.1.18:2373/content/images/2018/07/iotop.png" medium="image"/><content:encoded><![CDATA[<div class="kg-card-markdown"><img src="http://10.0.1.18:2373/content/images/2018/07/iotop.png" alt="iotop crashes when launching"><p>uname -r</p>
+<p>3.10.0-862.3.3.el7.x86_64</p>
+<p>ERROR info</p>
+<blockquote>
+<pre><code>Traceback (most recent call last):
+File &quot;/sbin/iotop&quot;, line 17, in
+main()
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 620, in main
+main_loop()
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 610, in
+main_loop = lambda: run_iotop(options)
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 508, in run_iotop
+return curses.wrapper(run_iotop_window, options)
+File &quot;/usr/lib64/python2.7/curses/wrapper.py&quot;, line 43, in wrapper
+return func(stdscr, *args, **kwds)
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 501, in run_iotop_window
+ui.run()
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 155, in run
+self.process_list.duration)
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 434, in refresh_display
+lines = self.get_data()
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 415, in get_data
+return list(map(format, processes))
+File &quot;/usr/lib/python2.7/site-packages/iotop/ui.py&quot;, line 388, in format
+cmdline = p.get_cmdline()
+File &quot;/usr/lib/python2.7/site-packages/iotop/data.py&quot;, line 293, in get_cmdline
+proc_status = parse_proc_pid_status(self.pid)
+File &quot;/usr/lib/python2.7/site-packages/iotop/data.py&quot;, line 196, in parse_proc_pid_status
+key, value = line.split(':\t', 1)
+ValueError: need more than 1 value to unpack```
+</code></pre>
+</blockquote>
+<p>Root cause analysis:<br>
+1.python chokes on an unexpected empty line in /proc/(whatever pid)/status<br>
+2.wrong separator was used</p>
+<blockquote>
+<pre><code>$ cat -vET /proc/1/status
+Seccomp:^I0$
+$ &lt;--------empty line
+SpeculationStoreBypass:```
+</code></pre>
+</blockquote>
+<p>and the logic of iotop in my server treating the data is(starts at line 192):</p>
+<blockquote>
+<pre><code>def parse_proc_pid_status(pid):
+    result_dict = {}
+    try:
+        for line in open('/proc/%d/status' % pid):
+            key, value = line.split('\t:', 1)
+            result_dict[key] = value.strip()
+        except IOError:
+            pass  # No such process
+    return result_dict
+</code></pre>
+</blockquote>
+<p>Obviously, the separator should be :\t but not \t:,and in order to not parsing the empty line after Seccomp,add a line before line.split could ever happen:<br>
+<code>if not line.strip(): continue</code><br>
+This is how the code block looks like when this bug is settled:</p>
+<blockquote>
+<pre><code>def parse_proc_pid_status(pid):
+    result_dict = {}
+    try:
+        for line in open('/proc/%d/status' % pid):
+            if not line.strip(): continue
+            key, value = line.split(':\t', 1)
+            result_dict[key] = value.strip()
+        except IOError:
+            pass  # No such process
+    return result_dict
+</code></pre>
+</blockquote>
+<p>Related Pages:<br>
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1584612">https://bugzilla.redhat.com/show_bug.cgi?id=1584612</a><br>
+(which does no help)</p>
+</div>]]></content:encoded></item><item><title><![CDATA[How to Shrink an LVM Volume Safely]]></title><description><![CDATA[<div class="kg-card-markdown"><pre><code>original link:&lt;br&gt;&lt;/br&gt;
+https://blog.shadypixel.com/how-to-shrink-an-lvm-volume-safely/```
+
+How to Shrink an LVM Volume Safely
+
+Logical Volume Management is a vast improvement over standard partitioning schemes. Among many other things, it allows you to decrease the size of a volume without recreating it completely. Here’</code></pre></div>]]></description><link>http://10.0.1.18:2373/how-to-shrink-an-lvm-volume-safely/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2b2</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Sun, 27 May 2018 09:16:41 GMT</pubDate><media:content url="http://10.0.1.18:2373/content/images/2018/07/Lvm.svg.png" medium="image"/><content:encoded><![CDATA[<div class="kg-card-markdown"><pre><code>original link:&lt;br&gt;&lt;/br&gt;
+https://blog.shadypixel.com/how-to-shrink-an-lvm-volume-safely/```
+
+How to Shrink an LVM Volume Safely
+
+Logical Volume Management is a vast improvement over standard partitioning schemes. Among many other things, it allows you to decrease the size of a volume without recreating it completely. Here’s how.
+
+First, as is always the case when you’re modifying disk volumes, partitions, or file systems, you should really have a recent backup. A typo in one the following commands could easily destroy data. You have been warned!
+
+All of the required steps must be performed on an unmounted volume. If want to reduce the size of a non-root volume, simply unmount it. For a root volume, you’ll have to boot from a CD. Any modern live or rescue CD should work fine. I prefer SystemRescueCD. It includes almost any disk management programs you might need. After booting from a CD, you may have to issue:
+
+# vgchange -a y
+
+This makes any logical volumes available to the Linux. Most boot CD’s will do it automatically some time during the boot process, but repeating the command won’t hurt. Next, force a file system check on the volume in question:
+
+# e2fsck -f /dev/polar/root
+
+Device names for LVM volumes follow the convention: /dev//. In this case, my volume group is named polar and the volume I’m going to shrink is named root. This is a critical step; resizing a file system in an inconsistent state could have disastrous consequences. Next, resize the actual file system:
+
+# resize2fs /dev/polar/root 180G
+
+Replace 180G with about 90% of the size you want the final volume to be. For example, in this case, I want the final volume to be 200 gigabytes, so I’ll reduce the file system to 180 gigabytes. Why is this necessary? When we reduce the size of the actual volume in the next step, it’s critical that the new size is greater than or equal to the size of the file system. After reading the documentation for both resizefs and lvreduce, I still haven’t been able to find out whether they’re using standard computer gigabytes (1024^3 bytes) or drive manufacturer gigabytes (1000^3 bytes). In this case, the difference is very important. To be on the safe side, we’ll just shrink the file system a bit more than necessary and expand it to use the full space available later. Next, reduce the size of the logical volume:
+
+# lvreduce -L 200G /dev/polar/root
+
+In this case, use the actual size you want to the volume to be. Finally, grow the file system so that it uses all available space on the logical volume:
+
+# resize2fs /dev/polar/root
+
+That’s it. Enjoy your newly acquired free space.
+
+
+</code></pre>
+</div>]]></content:encoded></item><item><title><![CDATA[What is "<<<" "<<" "<" and their differences]]></title><description><![CDATA[<div class="kg-card-markdown"><p>$ cat &lt;&lt;&lt; ‘hi there’ hi there</p>
+<p>传递右侧至左侧的标准输入</p>
+<p>$ cat &lt;&lt;&lt; ‘hi there’ hi there$ cat &lt;&lt; EOF &gt; hi &gt; there &gt; EOF hi there #可以不是EOF</p>
+<p>cat &gt; some-file &lt;&lt; FILE foo bar bar bar foo foo FILE</p>
+<p>$ cat &lt; /etc/fstab /dev/sda2 /boot</p></div>]]></description><link>http://10.0.1.18:2373/what-is/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2b1</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Sun, 11 Mar 2018 06:31:33 GMT</pubDate><media:content url="http://10.0.1.18:2373/content/images/2018/07/redirection_symbols.jpg" medium="image"/><content:encoded><![CDATA[<div class="kg-card-markdown"><img src="http://10.0.1.18:2373/content/images/2018/07/redirection_symbols.jpg" alt="What is "<<<" "<<" "<" and their differences"><p>$ cat &lt;&lt;&lt; ‘hi there’ hi there</p>
+<p>传递右侧至左侧的标准输入</p>
+<p>$ cat &lt;&lt;&lt; ‘hi there’ hi there$ cat &lt;&lt; EOF &gt; hi &gt; there &gt; EOF hi there #可以不是EOF</p>
+<p>cat &gt; some-file &lt;&lt; FILE foo bar bar bar foo foo FILE</p>
+<p>$ cat &lt; /etc/fstab /dev/sda2 /boot ext4 nosuid,noexec,nodev,rw,noatime,nodiratime 0 2 /dev/sda4 / ext4 rw,noatime,nodiratime, 0 1 /dev/sdb5 /var ext4 nosuid,noexec,nodev,rw,relatime 0 2 …</p>
+<p>excerpt from Bash man page</p>
+<p>Here Strings A variant of here documents, the format is: echo &quot;$string&quot; | command</p>
+<p>bash里引入pipe，那么command就会运行在subshell里，如下</p>
+<p>echo &quot;hello world&quot; | read first second echo $first $second</p>
+<p>会是俩空白<br>
+command 完毕变量并不会回到第一个echo的shell里</p>
+<p>当然，可以变通下</p>
+<p>echo &quot;hello world&quot; | { read first second echo $second $first }</p>
+<p>但是父shell里还是不会有first/second变量<br>
+而read first second &lt;&lt;&lt; “hello world” echo $first $second hello world</p>
+</div>]]></content:encoded></item><item><title><![CDATA[Vagrant freezes on 'SSH auth method: private key']]></title><description><![CDATA[<div class="kg-card-markdown"><p>github issue: <a href="https://github.com/hashicorp/vagrant/issues/8157">https://github.com/hashicorp/vagrant/issues/8157</a><br>
+debug:</p>
+<ol>
+<li>
+<p>Intel Virtualization VT-x:<br>
+CPU:G2010,supported<br>
+BIOS check: Virtualization <strong>not enabled</strong><br>
+after enabling virtualization in bios,vargant still stuck at private key but shows another warning</p>
+</li>
+<li>
+<p>port mapping:</p>
+</li>
+</ol>
+<p>the default Vagrantfile didn’t include a mapping of a port from</p></div>]]></description><link>http://10.0.1.18:2373/vagrant-freezes-on-ssh-auth-method-private-key/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2b0</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Thu, 22 Feb 2018 14:03:18 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>github issue: <a href="https://github.com/hashicorp/vagrant/issues/8157">https://github.com/hashicorp/vagrant/issues/8157</a><br>
+debug:</p>
+<ol>
+<li>
+<p>Intel Virtualization VT-x:<br>
+CPU:G2010,supported<br>
+BIOS check: Virtualization <strong>not enabled</strong><br>
+after enabling virtualization in bios,vargant still stuck at private key but shows another warning</p>
+</li>
+<li>
+<p>port mapping:</p>
+</li>
+</ol>
+<p>the default Vagrantfile didn’t include a mapping of a port from the host machine to 22 on the guest and it occurred to me that maybe the default mapping of port 2222 (host) to 22 (guest) wasn’t being honored. I put the following line in to make the mapping explicit, and the key-based SSH authentication has now started working:</p>
+<p>config.vm.network &quot;forwarded_port&quot;, guest: 22, host: 2222, host_ip: &quot;127.0.0.1&quot;, id: 'ssh'</p>
+<ol start="3">
+<li>VM cable connected y/n problem:<br>
+adding an extra line in VagrantFile does make vagrant work again:</li>
+</ol>
+<p>vb.customize [&quot;modifyvm&quot;, :id, &quot;--cableconnected1&quot;, &quot;on&quot;]</p>
+</div>]]></content:encoded></item><item><title><![CDATA[Getting Chrome to accept self-signed localhost certificate]]></title><description><![CDATA[<div class="kg-card-markdown"><p>解决方法来自：<br>
+<code>https://serverfault.com/questions/880804/can-not-get-rid-of-neterr-cert-common-name-invalid-error-in-chrome-with-self</code><br>
+<code>https://superuser.com/questions/947061/openssl-unable-to-find-distinguished-name-in-config</code><br>
+<code>https://stackoverflow.com/questions/43665243/invalid-self-signed-ssl-cert-subject-alternative-name-missing</code></p>
+<p>出现的问题：<br>
+1.COMMON_NAME_INVALID<br>
+2.SUBJECT_ALT_NAME_INVALID<br>
+3.unable to find ‘distinguished_name’ in config<br>
+4.error loading extension section SAN</p>
+<p>原因：<br>
+1.与2相关<br>
+2.<br>
+1）Specifically, this</p></div>]]></description><link>http://10.0.1.18:2373/getting-chrome-to-accept-self-signed-localhost-certificate/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2af</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Wed, 07 Feb 2018 10:50:42 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>解决方法来自：<br>
+<code>https://serverfault.com/questions/880804/can-not-get-rid-of-neterr-cert-common-name-invalid-error-in-chrome-with-self</code><br>
+<code>https://superuser.com/questions/947061/openssl-unable-to-find-distinguished-name-in-config</code><br>
+<code>https://stackoverflow.com/questions/43665243/invalid-self-signed-ssl-cert-subject-alternative-name-missing</code></p>
+<p>出现的问题：<br>
+1.COMMON_NAME_INVALID<br>
+2.SUBJECT_ALT_NAME_INVALID<br>
+3.unable to find ‘distinguished_name’ in config<br>
+4.error loading extension section SAN</p>
+<p>原因：<br>
+1.与2相关<br>
+2.<br>
+1）Specifically, this is due to <code>tools.ietf.org/html/rfc6125#section-5.7.3.1</code><br>
+which states “For TLS authentication with X.509 certificates, an identity from the DNS namespace MUST be checked against each subjectAltName extension of type dNSName present in the certificate. If no such extension is present, then the identity MUST be compared to the (most specific) Common Name in the Subject field of the certificate.” So, if any SAN exists then the CN is not checked.<br>
+2）Chrome no longer accepts certificates that fallback to common name. So even if a SAN does not exist, the CN is not checked. So the SAN seems mandatory</p>
+<p>3.缺少ssl.cnf中的一些信息<br>
+4.ssl.cnf缺少[SAN]信息</p>
+<p>openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -sha256 -subj '/CN=10.0.1.13/ST=Shanghai/L=Qingpu/O=Sheep Soft/' -keyout private_seafile.key -out seafile.crt -reqexts SAN -extensions SAN -config &lt;(cat ssl.cnf)</p>
+<p><code>ssl.cnf</code>:</p>
+<p>[req] req_extensions = v3_req distinguished_name = req_distinguished_name [req_distinguished_name] [v3_req] authorityKeyIdentifier=keyid,issuer basicConstraints=CA:FALSE keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment [SAN] subjectAltName = IP:10.0.1.13</p>
+</div>]]></content:encoded></item><item><title><![CDATA[“#! /usr/bin/env NAME” 与”#! /path/to/NAME”的优劣]]></title><description><![CDATA[<div class="kg-card-markdown"><p>以python为例:</p>
+<p><code>#! /usr/bin/env python</code></p>
+<p>优点和缺点都是:</p>
+<p>脚本会使用首先出现的用户的<code>$PATH</code>中的<code>python</code>路径</p>
+<p>借助环境变量<code>$PATH</code> 也就意味着不同的使用者执行同一个脚本,脚本的执行可能出现区别.对某一用户,执行的是<code>/usr/bin/python</code>.对另一个用户而言,执行的是<code>/home/phred/bin/python</code>,由于<code>python</code>的版本不同,脚本执行时或许会出错.</p>
+<p>而<code>$PATH</code>不同在<code>CRON</code>任务中有特殊情况,一般<code>cron</code>的环境是受限制的,<code>$PATH</code>很可能只是<code>/usr/bin:/bin</code>,所以<code>cron</code>执行的脚本,若使用<code>env</code>,解释器的路径很大程度上不被包含</p>
+<p>当<code></code></p></div>]]></description><link>http://10.0.1.18:2373/usrbinenv-name--e4-b8-8e-pathtoname-e7-9a-84-e4-bc-98-e5-8a-a3/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2ae</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Thu, 20 Jul 2017 07:56:23 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>以python为例:</p>
+<p><code>#! /usr/bin/env python</code></p>
+<p>优点和缺点都是:</p>
+<p>脚本会使用首先出现的用户的<code>$PATH</code>中的<code>python</code>路径</p>
+<p>借助环境变量<code>$PATH</code> 也就意味着不同的使用者执行同一个脚本,脚本的执行可能出现区别.对某一用户,执行的是<code>/usr/bin/python</code>.对另一个用户而言,执行的是<code>/home/phred/bin/python</code>,由于<code>python</code>的版本不同,脚本执行时或许会出错.</p>
+<p>而<code>$PATH</code>不同在<code>CRON</code>任务中有特殊情况,一般<code>cron</code>的环境是受限制的,<code>$PATH</code>很可能只是<code>/usr/bin:/bin</code>,所以<code>cron</code>执行的脚本,若使用<code>env</code>,解释器的路径很大程度上不被包含</p>
+<p>当<code>python</code>安装位置为 <code>/usr/local/bin</code>,但是用户的 <code>$PATH</code>变量不包含<code>/usr/local/bin</code>,那么就不能执行该脚本.（这种情况不太可能发生）</p>
+<p>声明<code>python</code>解释器的绝对路径 <code>#!/usr/bin/python</code> 会指定特定的解释器,不依赖<code>$PATH</code>变量</p>
+<p>另一个问题是,<code>#! /usr/bin/env</code>不支持向解释器传递变量.所以还是使用声明解释器的具体位置 :</p>
+<p>Perl 脚本 <code>#!/usr/bin/perl -w</code></p>
+<p>Csh 脚本 <code>#!/bin/csh -f</code></p>
+<p>此外, 其实使用 <code>#! /usr/bin/env</code> 一直存在争议,通常被认为是对<code>env</code>的不当使用.<code>env</code>最先用于在特定环境中执行命令.</p>
+<p>再者,一些老系统,比如<code>SunOS4</code>, <code>/usr/bin</code>就不包含<code>env</code>命令.一般情况下脚本针对不支持<code>env</code>的老系统,需要更改的不止是<code>env</code>,通常还包括其他修改,所以<code>env</code>不算是一个大问题.</p>
+<p>env还有一个问题,env会将解释器的名字（<code>bash/python</code>）来取代<code>ARGV[0]</code>,这样的做的结果就是在<code>ps</code>输出的程序列表里没办法用 <code>ps -C scriptname.sh</code> 找到以脚本名称命名的程序 ,名称只会为<code>bash</code>或<code>python</code>.</p>
+</div>]]></content:encoded></item><item><title><![CDATA[centos7系统语言设置]]></title><description><![CDATA[<div class="kg-card-markdown"><p><code>centos7</code>的<code>locale</code>系统语言设置允许我们明确用户界面与运行服务所使用的语言。</p>
+<p>系统级别分locale设置村处于<code>/etc/locale.conf</code>，系统启动时被<code>systemd</code>读取。所有用户与服务都将继承该locale配置。当然了，特定的用户与服务可以拥有自己的<code>locale</code>设置。</p>
+<p>1.升级软件</p>
+<blockquote>
+<h1 id="yumupdate">yum update</h1>
+</blockquote>
+<p>2.查看系统locale状态</p>
+<blockquote>
+<h1 id="localectlstatus">localectl status</h1>
+</blockquote>
+<p>结果类似于</p>
+<blockquote>
+<h1 id="localectlstatus">localectl status</h1>
+<p>System Locale: LANG=en_US.utf8<br>
+VC Keymap: n/a<br>
+X11 Layout: n/a</p>
+</blockquote>
+<p><code>System Locale</code> 即对应<code>/etc/locale.conf</code> 中:</p>
+<p><code>LANG=en_</code></p></div>]]></description><link>http://10.0.1.18:2373/centos7-e7-b3-bb-e7-bb-9f-e8-af-ad-e8-a8-80-e8-ae-be-e7-bd-ae/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2ad</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Sat, 01 Jul 2017 02:49:16 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p><code>centos7</code>的<code>locale</code>系统语言设置允许我们明确用户界面与运行服务所使用的语言。</p>
+<p>系统级别分locale设置村处于<code>/etc/locale.conf</code>，系统启动时被<code>systemd</code>读取。所有用户与服务都将继承该locale配置。当然了，特定的用户与服务可以拥有自己的<code>locale</code>设置。</p>
+<p>1.升级软件</p>
+<blockquote>
+<h1 id="yumupdate">yum update</h1>
+</blockquote>
+<p>2.查看系统locale状态</p>
+<blockquote>
+<h1 id="localectlstatus">localectl status</h1>
+</blockquote>
+<p>结果类似于</p>
+<blockquote>
+<h1 id="localectlstatus">localectl status</h1>
+<p>System Locale: LANG=en_US.utf8<br>
+VC Keymap: n/a<br>
+X11 Layout: n/a</p>
+</blockquote>
+<p><code>System Locale</code> 即对应<code>/etc/locale.conf</code> 中:</p>
+<p><code>LANG=en_US.utf8</code></p>
+<p>3.列出系统当前所有可用的<code>locale</code></p>
+<blockquote>
+<h1 id="localectllistlocales">localectl list-locales</h1>
+</blockquote>
+<p>以下列出en开始的locale</p>
+<blockquote>
+<h1 id="localectllistlocalesgrepen_">localectl list-locales | grep “en_”</h1>
+<p>en_AG<br>
+en_AG.utf8<br>
+en_AU<br>
+en_AU.iso88591<br>
+en_AU.utf8<br>
+en_BW<br>
+en_BW.iso88591<br>
+en_BW.utf8<br>
+en_CA<br>
+en_CA.iso88591<br>
+en_CA.utf8<br>
+en_DK<br>
+en_DK.iso88591<br>
+en_DK.utf8<br>
+en_GB<br>
+en_GB.iso88591<br>
+en_GB.iso885915<br>
+en_GB.utf8<br>
+en_HK<br>
+…</p>
+</blockquote>
+<p>4.设置系统<code>locale</code></p>
+<blockquote>
+<h1 id="localectlsetlocalelangen_gbuft8">localectl set-locale LANG=en_GB.uft8</h1>
+</blockquote>
+<p>5.查看设置结果</p>
+<blockquote>
+<h1 id="localectlstatus">localectl status</h1>
+<p>System Locale: LANG=en_GB.utf8<br>
+VC Keymap: n/a<br>
+X11 Layout: n/a</p>
+</blockquote>
+<p>5—.查看帮助</p>
+<blockquote>
+<h1 id="localectlhelp">localectl –help</h1>
+<p>localectl [OPTIONS…] COMMAND …</p>
+<p>Query or change system locale and keyboard settings.</p>
+<p>-h –help Show this help<br>
+–version Show package version<br>
+–no-pager Do not pipe output into a pager<br>
+–no-ask-password Do not prompt for password<br>
+-H –host=[USER@]HOST Operate on remote host<br>
+-M –machine=CONTAINER Operate on local container<br>
+–no-convert Don’t convert keyboard mappings</p>
+<p>Commands:<br>
+status Show current locale settings<br>
+set-locale LOCALE… Set system locale<br>
+list-locales Show known locales<br>
+set-keymap MAP [MAP] Set console and X11 keyboard mappings<br>
+list-keymaps Show known virtual console keyboard mappings<br>
+set-x11-keymap LAYOUT [MODEL [VARIANT [OPTIONS]]]<br>
+Set X11 and console keyboard mappings<br>
+list-x11-keymap-models Show known X11 keyboard mapping models<br>
+list-x11-keymap-layouts Show known X11 keyboard mapping layouts<br>
+list-x11-keymap-variants [LAYOUT]<br>
+Show known X11 keyboard mapping variants<br>
+list-x11-keymap-options Show known X11 keyboard mapping options</p>
+</blockquote>
+</div>]]></content:encoded></item><item><title><![CDATA[centos7的date与timezone]]></title><description><![CDATA[<div class="kg-card-markdown"><p>date命令与几乎所有程序一样，利用标准库访问时区数据。linux/*BSD(除去一些嵌入式系统)，标准的时区来自于<code>/etc/localtime</code>的内容</p>
+<p>那么如果<code>/etc/localtime</code>不包含正确的内容， 或者连接到的时区文件包含不正确的内容，抑或是内容被修改，那么date显示的时间将是UTC时间。</p>
+<blockquote>
+<p>rpm -qf /usr/share/zoneinfo/Asia/Shanghai</p>
+</blockquote>
+<p>显示<code>package tzdata</code>包含该文件<br>
+如果不知道具体的文件是否还能利用，那么</p>
+<blockquote>
+<p>yum reinstall tzdata</p>
+</blockquote>
+<p>然后使用timectl或者将<code>/etc/localtime</code>链接到正确的文件</p>
+<blockquote>
+<p>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</p>
+</blockquote>
+<p>最终，显示时间为CST+8</p>
+</div>]]></description><link>http://10.0.1.18:2373/centos7-e7-9a-84date-e4-b8-8etimezone/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2ac</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Sat, 01 Jul 2017 02:30:32 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>date命令与几乎所有程序一样，利用标准库访问时区数据。linux/*BSD(除去一些嵌入式系统)，标准的时区来自于<code>/etc/localtime</code>的内容</p>
+<p>那么如果<code>/etc/localtime</code>不包含正确的内容， 或者连接到的时区文件包含不正确的内容，抑或是内容被修改，那么date显示的时间将是UTC时间。</p>
+<blockquote>
+<p>rpm -qf /usr/share/zoneinfo/Asia/Shanghai</p>
+</blockquote>
+<p>显示<code>package tzdata</code>包含该文件<br>
+如果不知道具体的文件是否还能利用，那么</p>
+<blockquote>
+<p>yum reinstall tzdata</p>
+</blockquote>
+<p>然后使用timectl或者将<code>/etc/localtime</code>链接到正确的文件</p>
+<blockquote>
+<p>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</p>
+</blockquote>
+<p>最终，显示时间为CST+8</p>
+</div>]]></content:encoded></item><item><title><![CDATA[Bash中[与[[的区别]]></title><description><![CDATA[<div class="kg-card-markdown"><p>问题是：test,[,[[的区别是在哪里？</p>
+<p>[[是bash(ksh,recent POSIX sh…)对[命令的改进。相对于[,[[针对bash脚本的编写做出了几处优化：</p>
+<p>1.[[有一些[没有的特性<br>
+[[对待空字符串和包含空白的字符串更加灵活，不需要像[一样将变量或者字符串包裹在””之中。</p>
+<blockquote>
+<p>if [ -f “$FILE” ]</p>
+</blockquote>
+<p>可以正确处理$FILE变量，即便里面包含空白。</p>
+<blockquote>
+<p>if [[ -f $FILE ]]</p>
+</blockquote>
+<p>使用[[就不需要包裹$FILE变量了</p>
+<p>2.[[更加语义化<br>
+[[可以使用&amp;&amp;与||以及&lt;,&gt;.[使用的是指令参数，因此不能使用类似&amp;&amp;,||,&lt;,&gt;等不能作为参数存在的比较或者逻辑操作符。</p>
+<p>3.[[可使用=~比较符进行正则匹配<br></p></div>]]></description><link>http://10.0.1.18:2373/bash-e4-b8-ad-e4-b8-8e-e7-9a-84-e5-8c-ba-e5-88-ab/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2ab</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Sun, 28 May 2017 08:18:04 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>问题是：test,[,[[的区别是在哪里？</p>
+<p>[[是bash(ksh,recent POSIX sh…)对[命令的改进。相对于[,[[针对bash脚本的编写做出了几处优化：</p>
+<p>1.[[有一些[没有的特性<br>
+[[对待空字符串和包含空白的字符串更加灵活，不需要像[一样将变量或者字符串包裹在””之中。</p>
+<blockquote>
+<p>if [ -f “$FILE” ]</p>
+</blockquote>
+<p>可以正确处理$FILE变量，即便里面包含空白。</p>
+<blockquote>
+<p>if [[ -f $FILE ]]</p>
+</blockquote>
+<p>使用[[就不需要包裹$FILE变量了</p>
+<p>2.[[更加语义化<br>
+[[可以使用&amp;&amp;与||以及&lt;,&gt;.[使用的是指令参数，因此不能使用类似&amp;&amp;,||,&lt;,&gt;等不能作为参数存在的比较或者逻辑操作符。</p>
+<p>3.[[可使用=~比较符进行正则匹配<br>
+使用[</p>
+<blockquote>
+<p>if [ “$ANSWER” = y -o “$ANSWER” = yes ]<br>
+if [ “$ANSWER” == “y” -o “$ANSWER” == “yes” ]</p>
+</blockquote>
+<p>使用[[</p>
+<blockquote>
+<p>if [[ $ANSWER =~ ^y(es)?$ ]]</p>
+</blockquote>
+<p>而且如果以上面为例，键入yes，那么${BASH_REMATCH[1]}就会是”es”</p>
+<p>4.便捷无比的匹配功能</p>
+<blockquote>
+<p>if [[ $ANSWER = y* ]]</p>
+</blockquote>
+<p>那么如果这是用户可能作出yes输入的地方，输入的要求就只会是y开头的任何东西都可以进行下一步。</p>
+<p>不过最重要的一点还是[[作为bash的拓展，所以如果脚本兼容于sh那么还是需要使用[的。使用[[之前确保在脚本最前写上shebang line: #!/bin/bash</p>
+<p>至于test与[<br>
+1.功能几乎一样，语法与参数也基本相似<br>
+2.两者在其他Unix环境中基于sh的其他shell中均可正常工作<br>
+3.只能使用[。||,&amp;&amp;必须在不同的[]之间<br>
+4.原生不支持not操作符。作为替代在目标[]之前添加!作判断<br>
+5.==,!=是作为字符串比较的</p>
+<p>最后有一个直观一些的例子：<br>
+[[</p>
+<p>if [[ -d $newDir &amp;&amp; -n $(echo $newDir | grep &quot;^${webRootParent}&quot;) &amp;&amp; -n $(echo $newDir | grep '/$') ]] then ...</p>
+<p>[</p>
+<p>if [ -d &quot;$newDir&quot; -a -n $(echo &quot;$newDir&quot; | grep &quot;^${webRootParent}&quot;) -a -n $(echo &quot;$newDir&quot; | grep '/$') ] then ...</p>
+</div>]]></content:encoded></item><item><title><![CDATA[Usage of :- (colon dash) in bash]]></title><description><![CDATA[<div class="kg-card-markdown"><p></p>
+<h1 id="binbashpidpsefgrepjavaawknr1print2count230defaultsto30timesdelay310defaultsto10secondmkdirdateymdfolderdateymdwhilecountgt0dojstackpidfolderjstackdatehmsnsleepdelayletcountechondone">!/bin/bash pid=$(ps -ef | grep java | awk ' NR ==1 {print $2}') count=${2:-30} # defaults to 30 times delay=${3:-10} # defaults to 10 second mkdir $(date +&quot;%y%m%d&quot;) folder=$(date +&quot;%y%m%d&quot;) while [ $count -gt 0 ] do jstack $pid &gt;</h1></div>]]></description><link>http://10.0.1.18:2373/usage-of-colon-dash-in-bash/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2aa</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Wed, 05 Apr 2017 07:39:28 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p></p>
+<h1 id="binbashpidpsefgrepjavaawknr1print2count230defaultsto30timesdelay310defaultsto10secondmkdirdateymdfolderdateymdwhilecountgt0dojstackpidfolderjstackdatehmsnsleepdelayletcountechondone">!/bin/bash pid=$(ps -ef | grep java | awk ' NR ==1 {print $2}') count=${2:-30} # defaults to 30 times delay=${3:-10} # defaults to 10 second mkdir $(date +&quot;%y%m%d&quot;) folder=$(date +&quot;%y%m%d&quot;) while [ $count -gt 0 ] do jstack $pid &gt;./&quot;$folder&quot;/jstack.$(date +%H%M%S.%N) sleep $delay let count-- echo -n &quot;.&quot; done</h1>
+<p>:-有自己的含义，在bash的手册中有非常详细的描述，再次记录一下：</p>
+<p>${varname:-value} 如果varname存在且非null，则返回其值；否则，返回value<br>
+如果变量未定义，返回默认值</p>
+<p>${varname:=value} 如果varname存在且不是null，则返回他的值；否则，设置它为value，并返回其值<br>
+如果变量未定义，则设置变量为默认值</p>
+<p>${varname:?message} 如果varname存在且非null，则返回它的值；否则，显示varname:message，并退出当前的命令或脚本<br>
+为了捕捉由于变量未定义所导致的错误</p>
+<p>${varname:+value} 如果varname存在且非null，则返回value；否则，返回null<br>
+测试变量的存在</p>
+<p>注1：以上每个运算符内冒号（:）都是可选的，如果省略冒号，则将每个定义中的“存在且非null”部分改为 “存在”，即运算符仅用于测试变量是否存在，不测试其是否有值。<br>
+注2：varname前不需要加$符号。</p>
+</div>]]></content:encoded></item><item><title><![CDATA[diffenert ways to set awk separators]]></title><description><![CDATA[<div class="kg-card-markdown"><p>awk最近用到挺多，设置分隔符的方法却一直是</p>
+<blockquote>
+<p>awk ‘BEGIN{FS=”:”} …’</p>
+</blockquote>
+<p>总结一下几个常用的分隔符设置方法，殊途同归</p>
+<p>以</p>
+<blockquote>
+<p>echo “1: ” | awk ‘/1/ -F “:” {print $1}’</p>
+</blockquote>
+<p>为例，就有以下几种方式：</p>
+<p>awk -F: '{print $1}' awk -v FS=: '{print $1}' awk '{print $1}' FS=: awk 'BEGIN{FS=&quot;:&quot;} {print $1}'</p>
+<p>下列所有的设定方式都会在输入”1:2:3“之后返回1</p>
+<p>$ awk</p></div>]]></description><link>http://10.0.1.18:2373/diffenert-ways-to-set-awk-separators/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2a9</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Wed, 05 Apr 2017 07:22:53 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>awk最近用到挺多，设置分隔符的方法却一直是</p>
+<blockquote>
+<p>awk ‘BEGIN{FS=”:”} …’</p>
+</blockquote>
+<p>总结一下几个常用的分隔符设置方法，殊途同归</p>
+<p>以</p>
+<blockquote>
+<p>echo “1: ” | awk ‘/1/ -F “:” {print $1}’</p>
+</blockquote>
+<p>为例，就有以下几种方式：</p>
+<p>awk -F: '{print $1}' awk -v FS=: '{print $1}' awk '{print $1}' FS=: awk 'BEGIN{FS=&quot;:&quot;} {print $1}'</p>
+<p>下列所有的设定方式都会在输入”1:2:3“之后返回1</p>
+<p>$ awk -F: '{print $1}' &lt;&lt;&lt; &quot;1:2:3&quot; 1 $ awk -v FS=: '{print $1}' &lt;&lt;&lt; &quot;1:2:3&quot; 1 $ awk '{print $1}' FS=: &lt;&lt;&lt; &quot;1:2:3&quot; 1 $ awk 'BEGIN{FS=&quot;:&quot;} {print $1}' &lt;&lt;&lt; &quot;1:2:3&quot; 1</p>
+</div>]]></content:encoded></item><item><title><![CDATA[DST server and data tranfer]]></title><description><![CDATA[<div class="kg-card-markdown"><p>Don’t starve together 世界转移指南(Mac2Windows)</p>
+<p>将整个目录“文档/Klei/DoNotStarveTogether/Cluster_3”(对应你创建的第几个存档)，这个目录下看到几个文件：包括Master(主世界数据)，Caves(洞穴实际数据，如果选择添加洞穴的话)，cluster.ini(世界的配置文件)</p>
+<p>迁移到windows下 C:\Documents\Klei\DoNotStarveTogether\</p>
+<p>此时直接创建 服务器是完全可以的，但如果想在饥荒中看到这个世界，需要修改C:\Documents\Klei\DoNotStarveTogether\下的 文件，将Mac上的世界信息复制进windows端的配置文档中</p>
+<p></p>
+<p>Don’t starve together 独立服务器搭建指南[转载自http://lebi.github.io/ 感谢原作者!]</p>
+<p>Don’t starve</p></div>]]></description><link>http://10.0.1.18:2373/dst-server-and-data-tranfer/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2a8</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Wed, 05 Apr 2017 07:12:36 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>Don’t starve together 世界转移指南(Mac2Windows)</p>
+<p>将整个目录“文档/Klei/DoNotStarveTogether/Cluster_3”(对应你创建的第几个存档)，这个目录下看到几个文件：包括Master(主世界数据)，Caves(洞穴实际数据，如果选择添加洞穴的话)，cluster.ini(世界的配置文件)</p>
+<p>迁移到windows下 C:\Documents\Klei\DoNotStarveTogether\</p>
+<p>此时直接创建 服务器是完全可以的，但如果想在饥荒中看到这个世界，需要修改C:\Documents\Klei\DoNotStarveTogether\下的 文件，将Mac上的世界信息复制进windows端的配置文档中</p>
+<p></p>
+<p>Don’t starve together 独立服务器搭建指南[转载自http://lebi.github.io/ 感谢原作者!]</p>
+<p>Don’t starve together游戏玩到后期总是会变的非常不流畅，经过测试后排除网络问题，主要是因为联机玩DST时创建世界的那台主机因为需要同时处理画面和世界的刷新，玩到后期主机要处理的太多，其他联机的用户就会卡顿。为了解决这个问题我也是头疼了很久，最后发现在主机上搭建一个独立服务器，所有人都再连接到这个独立服务器上，卡顿问题就能很好的解决了。当然这个独立服务器并不需要一台独立的电脑，只需要一起玩游戏的某个人开一个独立服务器，大家再连接到这个独立服务器里，就不会卡顿了。</p>
+<p><strong>一.Windows搭建全过程</strong></p>
+<p>1.购买DST的正版</p>
+<p>2.创建世界</p>
+<p>首先打开饥荒，先创建一个世界，选择好mod，创建的选项等，然后点创建世界，等待世界创建成功后断开世界。需要记住你创建的这个世界是第几个存档，如图例子就是第三个存档。</p>
+<p>3.配置</p>
+<p>在世界创建成功后，就能在在目录“文档/Klei/DoNotStarveTogether/Cluster_3”(对应你创建的第几个存档)，这个目录下看到几个文件：包括Master(主世界数据)，Caves(洞穴实际数据，如果选择添加洞穴的话)，cluster.ini(世界的配置文件)。然后需要在这个目录中添加一个文件叫cluster_token.txt，如果文件存在，直接修改里面的内容。</p>
+<p>方法一:</p>
+<p>进入游戏以后，按～，输入TheNet:GenerateClusterToken()</p>
+<p>即会在Cluster里生成cluster_token.txt</p>
+<p>方法二:<br>
+进入DST后的这个页面，点击下面的个人资料</p>
+<p>出现下面这个页面，点击generate server token按钮，将上面出现的token复制到cluster_token.txt中，就可以了。如果没这一步在创建世界的时候会出错:Your Server will not start!</p>
+<p>4.创建脚本</p>
+<p>将上述准备工作做完后，就进入最后一步，创建启动脚本和启动服务器了。进入steam的安装目录，进入steamapps/common/Don’t Starve Together/bin，可以看到一个dontstarve_dedicated_server_nullrenderer.exe这个文件，从这个应用程序的名字就可以知道，就需要通过他来创建一个无画面的服务器。<br>
+创建一个文件start.bat,在里面写入</p>
+<blockquote>
+<p>dontstarve_dedicated_server_nullrenderer -console -cluster Cluster_3 -shard Master</p>
+</blockquote>
+<p>当然Cluster_3这里改成你对应的存档，然后创建一个文件start_cave.bat,在里面写入</p>
+<blockquote>
+<p>dontstarve_dedicated_server_nullrenderer -console -cluster Cluster_3 -shard Caves</p>
+</blockquote>
+<p>写完后就将这两个脚本启动就可以了。</p>
+<p>5.加入游戏</p>
+<p>选择浏览游戏，搜索创建的服务器名字(本机的话需要到LAN中才能找到世界)，就能找到这个世界并加入游戏了，亲测玩到后期也一点都不卡哦。</p>
+<p><strong>二.Mac搭建全过程</strong></p>
+<p>1,2 见windows搭建</p>
+<p>3.配置</p>
+<p>Mac的数据文件目录在”~/文稿/Klei/…”中，具体配置相同。</p>
+<p>4.创建脚本</p>
+<p>Mac中饥荒的目录在”~/Library/Application Support/Steam/steamapps/common/Don’t Stave Together.app/MacOS”中有一个叫dontstarve_dedicated_server_nullrenderer的文件，同在这个目录下创建两个文件start.sh和start_cave.sh，分别写入</p>
+<blockquote>
+<p>./dontstarve_dedicated_server_nullrenderer -console -cluster Cluster_3 -shard Master</p>
+</blockquote>
+<blockquote>
+<p>./dontstarve_dedicated_server_nullrenderer -console -cluster Cluster_3 -shard Caves</p>
+</blockquote>
+<p>最然后在terminal执行命令，使这两个文件变成可执行文件</p>
+<p>chmod a+x start.sh<br>
+chmod a+x start_cave.sh<br>
+通过下面的命令启动两个脚本</p>
+<p>./start.sh<br>
+./start_cave.sh<br>
+5.加入游戏</p>
+<p>加入游戏玩耍吧。</p>
+</div>]]></content:encoded></item><item><title><![CDATA[HTTPS Certificates switching to Let's Encrypt]]></title><description><![CDATA[<div class="kg-card-markdown"><ol>
+<li>下载安装 certbot</li>
+</ol>
+<blockquote>
+<h1 id="yuminstallycertbot">yum install -y certbot</h1>
+</blockquote>
+<ol start="2">
+<li>创建配置文件<br>
+先创建存放配置文件的文件夹：</li>
+</ol>
+<blockquote>
+<h1 id="mkdiretcletsencryptconfigs">mkdir /etc/letsencrypt/configs</h1>
+</blockquote>
+<p>编辑配置文件：</p>
+<blockquote>
+<h1 id="vimetcletsencryptconfigswwwdomaincomconf">vim /etc/letsencrypt/configs/www.domain.com.conf</h1>
+</blockquote>
+<p>把 domain.com 替换成自己的域名，配置文件内容：</p>
+<h1 id="wwwdomaincomwwwthisservercouldnotproveitiswwwdomaincomdomainwwwhttphttpsdomainswwwdomaincomrsakeysize2048emailyouremailexamplecomtexttruewwwdomaincomauthenticatorwebrootwebrootpathhomeadminwebwwwdomaincompublic_htmlvestanginx">写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&gt;https重定向则不在此讨论 domains</h1></div>]]></description><link>http://10.0.1.18:2373/lets-encrypt-e5-8a-a0-e5-af-86/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2a7</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Wed, 05 Apr 2017 06:47:42 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><ol>
+<li>下载安装 certbot</li>
+</ol>
+<blockquote>
+<h1 id="yuminstallycertbot">yum install -y certbot</h1>
+</blockquote>
+<ol start="2">
+<li>创建配置文件<br>
+先创建存放配置文件的文件夹：</li>
+</ol>
+<blockquote>
+<h1 id="mkdiretcletsencryptconfigs">mkdir /etc/letsencrypt/configs</h1>
+</blockquote>
+<p>编辑配置文件：</p>
+<blockquote>
+<h1 id="vimetcletsencryptconfigswwwdomaincomconf">vim /etc/letsencrypt/configs/www.domain.com.conf</h1>
+</blockquote>
+<p>把 domain.com 替换成自己的域名，配置文件内容：</p>
+<h1 id="wwwdomaincomwwwthisservercouldnotproveitiswwwdomaincomdomainwwwhttphttpsdomainswwwdomaincomrsakeysize2048emailyouremailexamplecomtexttruewwwdomaincomauthenticatorwebrootwebrootpathhomeadminwebwwwdomaincompublic_htmlvestanginx">写你的域名和邮箱 # 此处注意如果域名为www.domain.com，而填写的为加上www，浏览器会出现This server could not prove it is www.domain.com错我，由证书和域名不对应引起。 # 也就是说domain填写的内容是正常访问网站的网址，如果有www，则加上，没有就不用加，若有http-&gt;https重定向则不在此讨论 domains = www.domain.com rsa-key-size = 2048 email = <a href="mailto:your-email@example.com">your-email@example.com</a> text = True # 把下面的路径修改为 www.domain.com 的目录位置 authenticator = webroot webroot-path = /home/admin/web/www.domain.com/public_html # 上述的根目录是vesta面板下，nginx的网站根目录，请自行更改</h1>
+<p>使用webroot 的验证方法，这种方法适用于已经有一个 Web Server 运行中的情况。certbot 会自动在 /home/admin/web/www.domain.com/public_html 下面创建一个隐藏文件 .well-known/acme-challenge，通过请求这个文件来验证 www.domain.com 确实属于你。外网服务器访问 <a href="http://www.domain.com/.well-known/acme-challenge">http://www.domain.com/.well-known/acme-challenge</a> ，如果访问成功则验证OK。不需要手动创建这个文件，certbot 会根据配置文件自动完成。</p>
+<ol start="3">
+<li>执行证书自动化生成命令</li>
+</ol>
+<blockquote>
+<h1 id="certbotcetcletsencryptconfigsdomaincomconfcertonly">certbot -c /etc/letsencrypt/configs/domain.com.conf certonly</h1>
+</blockquote>
+<p>看到下面内容即生成成功:</p>
+<blockquote>
+<p>IMPORTANT NOTES:<br>
+– Congratulations! Your certificate and chain have been saved at /etc/letsencrypt/live/www.domain.com/fullchain.pem</p>
+<h1 id="etcletsencryptlivewwwdomaincom">如果运行顺利，所有服务器所需要的证书就已经生成好了。他们被放在了 /etc/letsencrypt/live/www.domain.com/ 下：</h1>
+</blockquote>
+<blockquote>
+<h1 id="lsetcletsencryptlivedomaincom">ls /etc/letsencrypt/live/domain.com/</h1>
+<p>cert.pem #server cert only<br>
+privkey.pem #private key<br>
+chain.pem #intermediates<br>
+fullchain.pem #server cert + intermediates</p>
+</blockquote>
+<p>4.配置 Nginx 加入证书</p>
+<p>vesta面板下，需要修改的nginx文件为/home/admin/conf/web/snginx.conf</p>
+<p>请根据自己的服务配置修改和添加内容，重点只需要关注7行：</p>
+<p>server { listen 443 http2; .... ssl on; ssl_certificate /etc/letsencrypt/live/www.domain.com/fullchain.pem; ssl_certificate_key /etc/letsencrypt/live/www.domain.com/privkey.pem; ssl_dhparam /etc/nginx/ssl/dhparam.pem; ssl_trusted_certificate /etc/letsencrypt/live/www.domain.com/root_ca_cert_plus_intermediates; resolver ; .... }</p>
+<p>这7行中，部分行还不存在或者需要修改，逐个说明:</p>
+<p>首先是第一行 listen 443 http2; 作用是启用 Nginx 的 ngxhttpv2_module 模块支持 HTTP2，Nginx 版本需要高于 1.9.5，且编译时需要设置 –with-http_v2_module。</p>
+<p>ssl on;代表开启ssl，可以附加在第一行，即listen 443 http2 ssl;也是同样的作用。</p>
+<p>ssl_certificate 和 ssl_certificate_key ，分别对应 fullchain.pem 和 privkey.pem，这2个文件是之前就生成好的证书和密钥。</p>
+<p>ssl_dhparam 通过下面命令生成：(但是实际上并不需要)</p>
+<blockquote>
+<h1 id="mkdiretcnginxssl">mkdir /etc/nginx/ssl</h1>
+<h1 id="openssldhparamoutetcnginxssldhparampem2048">openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048</h1>
+</blockquote>
+<p>(与上一步一样，可选) ssl_trusted_certificate 需要下载 Let’s Encrypt 的 Root Certificates，但是我们的ssl_certificate 已经包含了 intermediates 不再需要提供 ssl_trusted_certificate，这一步可以省略：</p>
+<blockquote>
+<h1 id="cdetcletsencryptliveexamplecom">cd /etc/letsencrypt/live/example.com</h1>
+<h1 id="wgethttpsletsencryptorgcertsisrgrootx1pem">wget <a href="https://letsencrypt.org/certs/isrgrootx1.pem">https://letsencrypt.org/certs/isrgrootx1.pem</a></h1>
+<h1 id="mvisrgrootx1pemrootpem">mv isrgrootx1.pem root.pem</h1>
+<h1 id="catrootpemchainpemroot_ca_cert_plus_intermediates">cat root.pem chain.pem &gt; root_ca_cert_plus_intermediates</h1>
+</blockquote>
+<p>resolver 的作用是 “resolve names of upstream servers into addresses”， 在這個配置中，resolver 是用來解析 OCSP 服務器的域名的，建议填写VPS 提供商的 DNS 服务器，或者域名提供商的域名解析服务器，例如万网：</p>
+<p>resolver dns9.hichina.com dns10.hichina.com;</p>
+<p>Nginx 配置完成后，重启后，用浏览器测试是否一切正常。</p>
+<blockquote>
+<h1 id="systemctlreloadnginx">systemctl reload nginx</h1>
+<h1 id="systemctlrestartnginx">systemctl restart nginx</h1>
+</blockquote>
+<p>这时候站点应该默认强制使用了 HTTPS，并且浏览器地址栏左边会有绿色的小锁：</p>
+<p>5.自动化定期更新证书<br>
+Let’s Encrypt 证书有效期是3个月，可以通过 certbot 来自动化续期。</p>
+<p>通过 systemd 来自动执行证书续期任务:</p>
+<h1 id="vimusrlibsystemdsystemautorenewserviceunitdescriptionletsencryptrenewalservicetypesimpleexecstartusrbincertbotrenewquietagreetosexecstartpostbinsystemctlrestartnginxserviceinstallwantedbymultiusertarget">vim /usr/lib/systemd/system/autorenew.service [Unit] Description=Let's Encrypt renewal [Service] Type=simple ExecStart=/usr/bin/certbot renew --quiet --agree-tos #启动包含的指令 ExecStartPost=/bin/systemctl restart nginx.service #启动成功后需要执行的指令 [Install] WantedBy=multi-user.target</h1>
+<p>由于服务需要和定时器Timer做关联，要将Type设置为simple而不是oneshot，不然在执行后系统会以为不需要再次运行而关掉定时器</p>
+<p>然后增加一个 systemd timer 来触发这个服务：</p>
+<h1 id="vimetcsystemdsystemautorenewtimerunitdescriptionmonthlyrenewalofletsencryptscertificatestimeronbootsec5minonunitactivesec30dayunitautorenewserviceinstallwantedbymultiusertarget">vim /etc/systemd/system/autorenew.timer [Unit] Description=Monthly renewal of Let's Encrypt's certificates [Timer] OnBootSec=5min OnUnitActiveSec=30day Unit=autorenew.service [Install] WantedBy=multi-user.target</h1>
+<p>OnBootSec设定在系统启动后多长时间后开始第一次执行，服务器上运行着网站和数据库服务，为了减少在系统启动时的负载，设置为系统启动5分钟之后。如果开启服务时已启动，那么从服务启动时开始计算5分钟后执行</p>
+<p>OnUnitActiveSec设定定时器运行周期，设置为30天。</p>
+<p>Unit制定执行体，指向autorenew.service。<br>
+启用服务，开启 timer：</p>
+<blockquote>
+<h1 id="systemctldaemonreload">systemctl daemon-reload 重载配置文档</h1>
+<h1 id="systemctlenableautorenewserviceetcsystemdsystemautorenewtimertimercdetcsystemdsystemlnsusrlibsystemdsystemautorenewservice">systemctl enable autorenew.service # 在/etc/systemd/system/建立autorenew.timer的软链接，并启用成可启动状态，等待timer激活，等同于cd /etc/systemd/system/;ln -s /usr/lib/systemd/system/autorenew.service</h1>
+<h1 id="systemstlenableautorenewtimertimer">systemstl enable autorenew.timer # 启用timer</h1>
+<h1 id="systemctlstartautorenewtimer">systemctl start autorenew.timer</h1>
+</blockquote>
+<p>上面两条命令执行完毕后，可以通过 systemctl list-timers 列出所有 systemd 定时服务。当中可以找到 letsencrypt.timer 并看到运行时间是四星期之后(因为刚刚执行过一次)。<br>
+<img src="http://www.wavejs.com/content/images/2017/04/Screen-Shot-2017-04-05-at-2.21.31-PM.png" alt=""></p>
+<blockquote>
+<h1 id="systemctlstatusautorenewservice">systemctl status autorenew.service</h1>
+</blockquote>
+<p><img src="http://www.wavejs.com/content/images/2017/04/Screen-Shot-2017-04-05-at-2.27.03-PM.png" alt=""><br>
+启动后的状态如图，是未激活状态，实际是等待timer来激活，到此基本就可以不用担心证书过期了。</p>
+</div>]]></content:encoded></item><item><title><![CDATA[IOS7 Cydia crash when opening fix]]></title><description><![CDATA[<div class="kg-card-markdown"><p>iPad mini2 Cydia 自1.1.15升级至1.1.30后，发现Cydia本身不能被打开，打开即闪退。</p>
+<p>给我的感觉是升级不成功，升级程序又将老版本Cydia(1.1.15)，然后导致这种情况。</p>
+<p>解决方法：</p>
+<p>1.下载Cydia安装包：<a href="http://apt.saurik.com/debs/cydia_1.1.15_iphoneos-arm.deb">cydia_1.1.15_iphoneos-arm.deb</a></p>
+<p>2.使用SSH登陆iPad：</p>
+<blockquote>
+<p>cd /var/root/Media/Cydia/AutoInstall</p>
+</blockquote>
+<p>若提示no such directory</p>
+<p>即Media文件夹下没有Cydia文件夹，那么创建Cydia,以及AutoInstall子文件夹：</p>
+<blockquote>
+<p>cd /var/root/Media</p>
+<p>mkdir /Cydia&amp;&amp;cd /Cydia&amp;</p></blockquote></div>]]></description><link>http://10.0.1.18:2373/ios7-cydia-crash-when-opening-fix/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2a6</guid><dc:creator><![CDATA[jim.li]]></dc:creator><pubDate>Thu, 02 Mar 2017 01:56:56 GMT</pubDate><content:encoded><![CDATA[<div class="kg-card-markdown"><p>iPad mini2 Cydia 自1.1.15升级至1.1.30后，发现Cydia本身不能被打开，打开即闪退。</p>
+<p>给我的感觉是升级不成功，升级程序又将老版本Cydia(1.1.15)，然后导致这种情况。</p>
+<p>解决方法：</p>
+<p>1.下载Cydia安装包：<a href="http://apt.saurik.com/debs/cydia_1.1.15_iphoneos-arm.deb">cydia_1.1.15_iphoneos-arm.deb</a></p>
+<p>2.使用SSH登陆iPad：</p>
+<blockquote>
+<p>cd /var/root/Media/Cydia/AutoInstall</p>
+</blockquote>
+<p>若提示no such directory</p>
+<p>即Media文件夹下没有Cydia文件夹，那么创建Cydia,以及AutoInstall子文件夹：</p>
+<blockquote>
+<p>cd /var/root/Media</p>
+<p>mkdir /Cydia&amp;&amp;cd /Cydia&amp;&amp;mkdir AutoInstall</p>
+</blockquote>
+<p>3.上传cydia_1.1.15_iphoneos-arm.deb</p>
+<blockquote>
+<p>scp 你的cydia_1.1.15_iphoneos-arm.deb路径 root@iPadIP地址：/var/root/Media/Cydia/AutoInstall/</p>
+<p>输入iPad默认root密码：alpine</p>
+</blockquote>
+<p>4.重启iPad</p>
+<blockquote>
+<p>reboot -h now</p>
+</blockquote>
+<p>5.Cydia即可正常打开，但不要升级1.1.30，否则会重复闪退，解决方法也还是一样的。</p>
+</div>]]></content:encoded></item></channel></rss>

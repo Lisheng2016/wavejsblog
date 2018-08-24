@@ -1,5 +1,5 @@
 (function () {
-        var apiUrl = '//10.0.2.15:2373/ghost/api/v0.1/',
+        var apiUrl = '//10.0.1.18:2373/ghost/api/v0.1/',
         clientId,
         clientSecret,
         url,
