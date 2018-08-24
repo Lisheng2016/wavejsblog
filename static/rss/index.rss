@@ -1,18 +1,44 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kb.wavejs.com</title><description>Enhancing Ability with Linux and Beyond</description><link>http://10.0.1.18:2373/</link><image><url>http://10.0.1.18:2373/favicon.png</url><title>kb.wavejs.com</title><link>http://10.0.1.18:2373/</link></image><generator>Ghost 1.24</generator><lastBuildDate>Fri, 24 Aug 2018 12:26:03 GMT</lastBuildDate><atom:link href="http://10.0.1.18:2373/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>tcp flags switch in iptables: Usage</title><description>&lt;div class="kg-card-markdown"&gt;&lt;p&gt;The --tcp-flags switch takes two arguments only. The first argument is which flags to check. The second argument is the flags from the first argument that should be set for a match. Thus your line:&lt;/p&gt;
-&lt;p&gt;-p tcp --tcp-flags SYN,ACK,FIN,RST SYN -j DROP&lt;/p&gt;
-&lt;p&gt;Is saying: &amp;quot;Match if&lt;/p&gt;&lt;/div&gt;</description><link>http://10.0.1.18:2373/tcp-flags-in-iptables/</link><guid isPermaLink="false">5b7fc973437f280dfb1c577e</guid><dc:creator>jim.li</dc:creator><pubDate>Fri, 24 Aug 2018 09:02:53 GMT</pubDate><content:encoded>&lt;div class="kg-card-markdown"&gt;&lt;p&gt;The --tcp-flags switch takes two arguments only. The first argument is which flags to check. The second argument is the flags from the first argument that should be set for a match. Thus your line:&lt;/p&gt;
-&lt;p&gt;-p tcp --tcp-flags SYN,ACK,FIN,RST SYN -j DROP&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>kb.wavejs.com</title><description>Enhancing Ability with Linux and Beyond</description><link>http://10.0.1.18:2373/</link><image><url>http://10.0.1.18:2373/favicon.png</url><title>kb.wavejs.com</title><link>http://10.0.1.18:2373/</link></image><generator>Ghost 1.24</generator><lastBuildDate>Fri, 24 Aug 2018 15:49:12 GMT</lastBuildDate><atom:link href="http://10.0.1.18:2373/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>tcp flags switch in iptables: Usage</title><description>&lt;div class="kg-card-markdown"&gt;&lt;p&gt;The --tcp-flags switch takes two arguments only. The first argument is which flags to check. The second argument is the flags from the first argument that should be set for a match. Take This line as an example:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-p tcp --tcp-flags SYN,ACK,FIN,RST SYN -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Is saying:&lt;/p&gt;&lt;/div&gt;</description><link>http://10.0.1.18:2373/tcp-flags-in-iptables/</link><guid isPermaLink="false">5b7fc973437f280dfb1c577e</guid><dc:creator>jim.li</dc:creator><pubDate>Fri, 24 Aug 2018 09:02:53 GMT</pubDate><content:encoded>&lt;div class="kg-card-markdown"&gt;&lt;p&gt;The --tcp-flags switch takes two arguments only. The first argument is which flags to check. The second argument is the flags from the first argument that should be set for a match. Take This line as an example:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-p tcp --tcp-flags SYN,ACK,FIN,RST SYN -j DROP&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Is saying: &amp;quot;Match if only the SYN flag is set from these four. (The space separates the first and second arguments.)&lt;/p&gt;
-&lt;p&gt;-p tcp --tcp-flags ALL SYN -j DROP&lt;/p&gt;
-&lt;p&gt;means check ALL flags and match those packets with nothing but SYN set. The third of your examples is bad syntax, since it gives three arguments. Your first rule would drop all new TCP connections coming in, which probably isn't what you want.&lt;/p&gt;
-&lt;p&gt;The switch is mostly used to drop packets with meaningless TCP flags set. You wouldn't, for instance, get legitimate packets with both SYN and RST set, for instance or SYN and FIN. Take this snippet from one of my* firewall scripts:&lt;/p&gt;
-&lt;p&gt;${IPTABLES} -t filter -A INETIN -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP&lt;br&gt;
-${IPTABLES} -t filter -A INETIN -p tcp --tcp-flags SYN,RST SYN,RST -j DROP&lt;br&gt;
-${IPTABLES} -t filter -A INETIN -p tcp --tcp-flags SYN,URG SYN,URG -j DROP&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-p tcp --tcp-flags ALL SYN -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;means check ALL flags and match those packets with nothing but SYN set.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;--syn is equivalent to --tcp-flags ALL SYN&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The switch is mostly used to drop packets with meaningless TCP flags set. You wouldn't, for instance, get legitimate packets with both SYN and RST set, or SYN and FIN,for instance. Taken a few examples from my server's firewall scripts:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Stealth Scans and TCP State Flags&lt;br&gt;
+All of the bits are cleared&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;$IPT -A INPUT -p tcp --tcp-flags ALL none -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SYN and FIN are both Set&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;$IPT -A INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SYN and RST are both Set&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;$IPT -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FIN and RST are both Set&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;$IPT -A INPUT -p tcp --tcp-flags FIN,RST FIN,RST -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FIN is the only bit set ,but not with the expected accompanying ACK set&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;$IPT -A INPUT -p tcp --tcp-flags FIN,ACK FIN -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PSH is the only bit set ,but not with the expected accompanying ACK set&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;$IPT -A INPUT -p tcp --tcp-flags PSH,ACK PSH -j DROP&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;URG is the only bit set ,but not with the expected accompanying ACK set&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;$IPT -A INPUT -p tcp --tcp-flags URG,ACK URG -j DROP&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;These check for specific combinations of TCP flags that should never occur naturally and drop the packets.&lt;/p&gt;
-&lt;p&gt;More reading at the man page.&lt;/p&gt;
-&lt;/div&gt;</content:encoded></item><item><title>iotop crashes when launching</title><description>&lt;div class="kg-card-markdown"&gt;&lt;p&gt;uname -r&lt;/p&gt;
-&lt;p&gt;3.10.0-862.3.3.el7.x86_64&lt;/p&gt;
+&lt;/div&gt;</content:encoded></item><item><title>iotop crashes when launching</title><description>&lt;div class="kg-card-markdown"&gt;&lt;p&gt;&lt;code&gt;$ uname -r&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;3.10.0-862.3.3.el7.x86_64&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;ERROR info&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;pre&gt;&lt;code&gt;Traceback (most recent call last):
@@ -20,8 +46,8 @@ File &amp;quot;/sbin/iotop&amp;quot;, line 17, in
 main()
 File &amp;quot;/usr/lib/python2.7/site-packages/iotop/ui.py&amp;quot;, line 620, in main
 main_loop()
-File &amp;quot;/usr/lib/python2.7/site-packages/&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;&lt;/div&gt;</description><link>http://10.0.1.18:2373/iotop-crashes-when-launching/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2b3</guid><dc:creator>jim.li</dc:creator><pubDate>Wed, 04 Jul 2018 08:42:01 GMT</pubDate><media:content url="http://10.0.1.18:2373/content/images/2018/07/iotop.png" medium="image"/><content:encoded>&lt;div class="kg-card-markdown"&gt;&lt;img src="http://10.0.1.18:2373/content/images/2018/07/iotop.png" alt="iotop crashes when launching"&gt;&lt;p&gt;uname -r&lt;/p&gt;
-&lt;p&gt;3.10.0-862.3.3.el7.x86_64&lt;/p&gt;
+File &amp;quot;/usr/lib/python2.7/site-packages/&lt;/code&gt;&lt;/pre&gt;&lt;/blockquote&gt;&lt;/div&gt;</description><link>http://10.0.1.18:2373/iotop-crashes-when-launching/</link><guid isPermaLink="false">5b51abcd43e51e6c4228c2b3</guid><dc:creator>jim.li</dc:creator><pubDate>Wed, 04 Jul 2018 08:42:01 GMT</pubDate><media:content url="http://10.0.1.18:2373/content/images/2018/07/iotop.png" medium="image"/><content:encoded>&lt;div class="kg-card-markdown"&gt;&lt;img src="http://10.0.1.18:2373/content/images/2018/07/iotop.png" alt="iotop crashes when launching"&gt;&lt;p&gt;&lt;code&gt;$ uname -r&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;3.10.0-862.3.3.el7.x86_64&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;ERROR info&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;pre&gt;&lt;code&gt;Traceback (most recent call last):
@@ -72,7 +98,7 @@ SpeculationStoreBypass:```
             result_dict[key] = value.strip()
         except IOError:
             pass  # No such process
-    return result_dict
+    return result_dict```
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Obviously, the separator should be :\t but not \t:,and in order to not parsing the empty line after Seccomp,add a line before line.split could ever happen:&lt;br&gt;
@@ -88,7 +114,7 @@ This is how the code block looks like when this bug is settled:&lt;/p&gt;
             result_dict[key] = value.strip()
         except IOError:
             pass  # No such process
-    return result_dict
+    return result_dict```
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Related Pages:&lt;br&gt;
